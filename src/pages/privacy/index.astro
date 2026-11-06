@@ -1,0 +1,38 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../site';
+---
+<Base title="Privacy Policy – Hit the Button Math" description="How Hit the Button Math handles data: no accounts, scores in localStorage, advertising cookies, child-directed / non-personalised ads and how to contact us." crumbs={[{ name: 'Privacy', path: '/privacy/' }]}>
+  <div class="wrap prose">
+    <h1><span class="grad-text">Privacy policy</span></h1>
+    <p class="meta">Last updated <time datetime={SITE.updated}>{new Date(SITE.updated + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</time></p>
+
+    <h2>No accounts</h2>
+    <p>You do not create an account to use this site. We do not ask children for a name, email, phone number or password to play.</p>
+
+    <h2>Information stored on your device</h2>
+    <p>Best scores for each game setting are saved in your browser using <strong>localStorage</strong> (keys beginning with <code>htbm:</code>). That data stays on your device. We do not receive it. Clearing your browser site data deletes those scores.</p>
+
+    <h2>Advertising</h2>
+    <p>We may show Google AdSense (or similar) ads to cover running costs. Ads are kept away from the game area where possible.</p>
+    <ul>
+      <li>Google may use cookies or similar technologies to serve ads. See <a href="https://policies.google.com/technologies/ads" rel="noopener" target="_blank">Google’s advertising policies</a> and <a href="https://policies.google.com/technologies/partner-sites" rel="noopener" target="_blank">how Google uses information from sites that use its services</a>.</li>
+      <li>Because this site is aimed at primary-age children, we treat advertising as <strong>child-directed</strong>: when AdSense is enabled, the site sets non-personalised ads (<code>requestNonPersonalizedAds = 1</code>) and records a child-directed flag in page config for publisher tagging (including COPPA-style treatment where it applies). Interest-based / personalised advertising is not intended on this site.</li>
+      <li>Ads are not placed inside the game console. If ads appear, they sit outside the play area with reserved space where possible to limit layout shift.</li>
+      <li>Until an AdSense publisher ID is configured in site settings, no Google ad script loads. A public <code>ads.txt</code> file is reserved for the authorised seller line once a publisher ID is approved.</li>
+      <li>Optional privacy-friendly analytics (for example Plausible) only loads if an analytics domain is configured; it is off by default and is not used to build advertising profiles of children.</li>
+    </ul>
+
+    <h2>Server logs and analytics</h2>
+    <p>Like most websites, our host may keep basic server logs (for example IP address, browser type and pages requested) for security and reliability. We do not sell personal information.</p>
+
+    <h2>Children</h2>
+    <p>We do not knowingly collect personal information from children. If you think a child has sent us personal information by email, contact us and we will delete it.</p>
+
+    <h2>Your rights (UK GDPR)</h2>
+    <p>If you are in the UK you may have rights to access, correct or delete personal data we hold. Because gameplay scores never leave your device, those rights mainly apply to emails you send us.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about privacy: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. Related: <a href="/terms/">terms of use</a> · <a href="/disclaimer/">disclaimer</a>.</p>
+  </div>
+</Base>

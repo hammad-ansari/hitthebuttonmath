@@ -1,0 +1,97 @@
+---
+import SkillPage from '../../components/SkillPage.astro';
+import Sources from '../../components/Sources.astro';
+import { SRC } from '../../sources';
+const faq = [
+  { q: 'What are number bonds?', a: 'Number bonds are pairs of numbers that add up to a given total. For 10 the bonds are 0+10, 1+9, 2+8, 3+7, 4+6 and 5+5, plus each pair the other way round, and the matching subtraction facts.' },
+  { q: 'What age do children learn number bonds?', a: 'In England, Reception expects automatic recall of bonds up to 5 and some to 10. Bonds within 20 are Year 1 work, and children should know bonds to 20 by the end of Year 2, then use related facts up to 100.' },
+  { q: 'What are number bonds to 100?', a: 'Pairs that make 100, such as 40+60 or 35+65. In this game bonds to 100 use multiples of 5, which is how most classes first meet them.' },
+  { q: 'My child counts on their fingers. Is that a problem?', a: 'Not at first. Fingers help understanding. The aim is to move from counting to just knowing, using short regular practice.' },
+];
+
+---
+<SkillPage title="Hit the Button Number Bonds – Bonds to 10, 20 and 100 Game"
+  description="Practise number bonds to 10, 20 and 100 with a free Hit the Button style game. What each year group is expected to know, common mistakes and tips for parents."
+  h1="Number bonds game" path="/number-bonds/" crumb="Number bonds" mode="bonds" option="10"
+  answer="<strong>Number bonds are pairs of numbers that make a total</strong>, such as 6 + 4 = 10. Children in England should know bonds to 20 by the end of Year 2. Choose bonds to 10, 20 or 100 below and find the missing number before time runs out."
+  gameHeading="Play number bonds" faq={faq}>
+  <h2>Number bonds to 10</h2>
+  <table><thead><tr><th scope="col">Pair</th><th scope="col">Flipped</th><th scope="col">Subtraction facts</th></tr></thead><tbody>
+    {[0,1,2,3,4,5].map((a) => <tr><td>{a} + {10 - a} = 10</td><td>{10 - a} + {a} = 10</td><td>10 − {a} = {10 - a}, 10 − {10 - a} = {a}</td></tr>)}
+  </tbody></table>
+  <p>Six pairs, and that's all there is to it. Once a child knows these six cold, bonds to 20 and 100 are mostly the same facts with bigger numbers.</p>
+
+  <h2>What each year group is expected to know</h2>
+  <div class="year-grid">
+    <div><b>Reception</b><p>Recall bonds up to 5 without counting, including subtraction, and some bonds to 10 (<a href={SRC.elg.u} rel="noopener" target="_blank">Early Learning Goal</a>).</p></div>
+    <div><b>Year 1</b><p>Represent and use bonds and related subtraction facts within 20. Add and subtract within 10 fluently.</p></div>
+    <div><b>Year 2</b><p>Know bonds to 20. Use them to work out related facts up to 100, such as 30 + 70.</p></div>
+    <div><b>Year 3</b><p>Add and subtract fluently across 10, for example 8 + 5 or 13 − 6.</p></div>
+  </div>
+  <p class="small">Year 1 to 3 points come from the <a href={SRC.nc.u} rel="noopener" target="_blank">national curriculum</a> and the DfE's <a href={SRC.guidance.u} rel="noopener" target="_blank">ready-to-progress criteria</a>.</p>
+
+  <h2>Why schools spend so long on them</h2>
+  <p>Number bonds are a mental shortcut. A child who knows 8 + 2 = 10 can work out 8 + 5 by "bridging": 8 + 2 makes 10, and 3 more makes 13. Without bonds, the same child has to count on one at a time, which is slow and easy to get wrong.</p>
+  <p>The Education Endowment Foundation's <a href={SRC.eef.u} rel="noopener" target="_blank">maths guidance</a> names number bonds among the facts pupils need to recall quickly. Its point is that children who can't retrieve them are likely to struggle with the maths that builds on them later.</p>
+
+  <h2>The part-whole model</h2>
+  <p>Homework often shows a whole split into two parts. The diagram below is 10 as a whole with parts 6 and 4. Taking one part away leaves the other (10 − 6 = 4). Schools using the NCETM's <a href={SRC.ncetm.u} rel="noopener" target="_blank">Mastering Number</a> programme also use a rekenrek (bead frame).</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 320 200" role="img" aria-labelledby="pw-title pw-desc" xmlns="http://www.w3.org/2000/svg">
+      <title id="pw-title">Part-whole model for 10</title>
+      <desc id="pw-desc">A large circle labelled 10 connected to two smaller circles labelled 6 and 4.</desc>
+      <circle cx="160" cy="55" r="42" fill="#efeaff" stroke="#6d3df5" stroke-width="3"/>
+      <text x="160" y="62" text-anchor="middle" font-size="28" font-weight="700" fill="#1b1446" font-family="system-ui,sans-serif">10</text>
+      <line x1="140" y1="95" x2="90" y2="130" stroke="#6d3df5" stroke-width="3"/>
+      <line x1="180" y1="95" x2="230" y2="130" stroke="#6d3df5" stroke-width="3"/>
+      <circle cx="80" cy="155" r="36" fill="#ffe8f1" stroke="#ff3d8b" stroke-width="3"/>
+      <text x="80" y="162" text-anchor="middle" font-size="26" font-weight="700" fill="#1b1446" font-family="system-ui,sans-serif">6</text>
+      <circle cx="240" cy="155" r="36" fill="#e6fff6" stroke="#0fae88" stroke-width="3"/>
+      <text x="240" y="162" text-anchor="middle" font-size="26" font-weight="700" fill="#1b1446" font-family="system-ui,sans-serif">4</text>
+    </svg>
+    <figcaption>Part-whole: 6 and 4 make 10. Cover one part and ask “how many are hiding?”</figcaption>
+  </figure>
+
+  <h2>Ten frames</h2>
+  <p>A ten frame is a 2 × 5 grid. Children see 6 as “five and one more” without counting every dot. Point to the empty spaces and ask how many more make 10 — that empty count <em>is</em> the bond partner.</p>
+  <figure class="diagram">
+    <svg viewBox="0 0 280 130" role="img" aria-labelledby="tf-title tf-desc" xmlns="http://www.w3.org/2000/svg">
+      <title id="tf-title">Ten frame showing 6</title>
+      <desc id="tf-desc">A ten frame with six filled circles in the top row and first cell of the bottom row, and four empty cells.</desc>
+      <rect x="20" y="15" width="240" height="100" rx="8" fill="#fff" stroke="#1b1446" stroke-width="3"/>
+      <line x1="68" y1="15" x2="68" y2="115" stroke="#1b1446" stroke-width="2"/>
+      <line x1="116" y1="15" x2="116" y2="115" stroke="#1b1446" stroke-width="2"/>
+      <line x1="164" y1="15" x2="164" y2="115" stroke="#1b1446" stroke-width="2"/>
+      <line x1="212" y1="15" x2="212" y2="115" stroke="#1b1446" stroke-width="2"/>
+      <line x1="20" y1="65" x2="260" y2="65" stroke="#1b1446" stroke-width="2"/>
+      <circle cx="44" cy="40" r="16" fill="#6d3df5"/><circle cx="92" cy="40" r="16" fill="#6d3df5"/><circle cx="140" cy="40" r="16" fill="#6d3df5"/><circle cx="188" cy="40" r="16" fill="#6d3df5"/><circle cx="236" cy="40" r="16" fill="#6d3df5"/>
+      <circle cx="44" cy="90" r="16" fill="#6d3df5"/>
+      <circle cx="92" cy="90" r="14" fill="none" stroke="#9ca3af" stroke-width="2" stroke-dasharray="4 3"/>
+      <circle cx="140" cy="90" r="14" fill="none" stroke="#9ca3af" stroke-width="2" stroke-dasharray="4 3"/>
+      <circle cx="188" cy="90" r="14" fill="none" stroke="#9ca3af" stroke-width="2" stroke-dasharray="4 3"/>
+      <circle cx="236" cy="90" r="14" fill="none" stroke="#9ca3af" stroke-width="2" stroke-dasharray="4 3"/>
+    </svg>
+    <figcaption>Ten frame for 6: five on the top row and one more. Four empty spaces → the bond is 6 + 4 = 10.</figcaption>
+  </figure>
+  <p>Try both pictures with fingers first, then play <strong>bonds to 10</strong> in the game above until the partner appears without counting.</p>
+
+  <div class="tip"><h2>From 10 to 20 to 100</h2>
+  <p>Bonds to 20 and 100 are mostly bonds to 10 in disguise. Because 3 + 7 = 10, then 13 + 7 = 20 and 30 + 70 = 100. Point this out and the bigger numbers stop feeling scary.</p></div>
+
+  <h2>Common mistakes to look out for</h2>
+  <ul class="mistakes">
+    <li><strong>Off by one.</strong> Saying 6 + 3 = 10 usually means the child counted on from 6 by saying "6" again. Check by building it on fingers.</li>
+    <li><strong>Bonds to 100 that make 110.</strong> For 35, children often say 75, because they add 3 + 7 = 10 in the tens and 5 + 5 = 10 in the ones. The right answer is 65: the ones make 10, so the tens only need to make 90.</li>
+    <li><strong>Only knowing them one way.</strong> A child who knows 4 + 6 but stalls on "10 − 4" knows the fact as a chant, not a bond. Ask it as subtraction and as a missing number: 4 + ? = 10.</li>
+  </ul>
+
+  <h2>Everyday ways to practise</h2>
+  <ul>
+    <li>Fingers: hold up 7 and ask how many are hiding.</li>
+    <li>Shopping: "this costs 70p, how much change from £1?"</li>
+    <li>Cards: pair up cards that total 10.</li>
+    <li>Car journeys: call out a number and your child shouts its partner.</li>
+  </ul>
+  <p>Next step: <a href="/doubles/">doubles and halves</a> use the same quick-recall skills.</p>
+  <Sources keys={['elg','nc','guidance','eef','ncetm']} />
+</SkillPage>

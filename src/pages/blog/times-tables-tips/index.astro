@@ -1,0 +1,129 @@
+---
+import Post from '../../../layouts/Post.astro';
+import Sources from '../../../components/Sources.astro';
+import { SRC } from '../../../sources';
+const faq = [
+  { q: 'What is the fastest way to learn times tables?', a: 'There is no overnight trick. Learn tables in an order where each builds on the last, practise five to ten minutes most days, ask facts out of order, and isolate the few facts that keep slipping rather than re-drilling a whole table.' },
+  { q: 'How long should my child practise each day?', a: 'Five to ten minutes is plenty. Short daily practice works better than one long session at the weekend.' },
+  { q: 'Is it bad to time times tables practice?', a: 'Not if it stays low-stakes. Use Practice mode if your child freezes with a timer, compare only with their own last score, and praise accuracy before speed.' },
+  { q: 'Should we learn the tables in order from 1 to 12?', a: 'No. Start with 10, 2 and 5 (clear patterns), then 4 and 8 (doubling), 3 and 6, then 9, 11 and 12, and leave 7 until last. That way most "new" facts are already known from another table.' },
+  { q: 'How do I know which facts are weak?', a: 'Play one Practice round per table and note which answers need the hint. Or run an MTC-style round and read the "facts to revisit" list at the end.' },
+];
+---
+<Post path="/blog/times-tables-tips/" faq={faq}>
+  <div class="answer"><p><strong>In short:</strong> learn the tables in a sensible order, practise for a few minutes most days, build new facts from ones your child already knows, and ask facts out of order so they're recalled, not counted. Most children in England are expected to know them all by the end of Year 4.</p></div>
+
+  <nav class="toc" aria-label="On this page">
+    <h2>On this page</h2>
+    <ol>
+      <li><a href="#knowing">What "knowing" a table means</a></li>
+      <li><a href="#by-year">What each year group should know</a></li>
+      <li><a href="#order">The order to learn them — and why</a></li>
+      <li><a href="#strategies">Worked strategies for tricky facts</a></li>
+      <li><a href="#reference">Quick reference: every table at a glance</a></li>
+      <li><a href="#term-plan">A term practice plan</a></li>
+      <li><a href="#weak-facts">How to spot weak facts</a></li>
+      <li><a href="#mistakes">Mistakes parents often make</a></li>
+      <li><a href="#anxiety">When it isn't sticking</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="knowing">What "knowing" a times table means</h2>
+  <p>A child knows 7 × 8 when the answer arrives in a second or two, without counting up from 7. That's fluency. The Year 4 <a href="/blog/year-4-multiplication-check-practice/">Multiplication Tables Check</a> gives only 6 seconds per question, so working a fact out from scratch usually runs out of time.</p>
+  <p>Understanding comes first. 4 × 3 means four groups of three, or three groups of four — same total. Arrays on a page, Lego bricks or a drawing make that visible. Once the idea is clear, short retrieval practice moves the fact into memory. The Education Endowment Foundation's <a href={SRC.eef.u} rel="noopener" target="_blank">maths guidance</a> is blunt: pupils who can't retrieve multiplication facts quickly tend to struggle later with fractions and written methods.</p>
+
+  <h2 id="by-year">What your child should know, by year</h2>
+  <div class="year-grid">
+    <div><b>Year 2</b><p>The 2, 5 and 10 tables, including odd and even numbers.</p></div>
+    <div><b>Year 3</b><p>The 3, 4 and 8 tables, using doubling to link 2s, 4s and 8s.</p></div>
+    <div><b>Year 4</b><p>Every table up to 12 × 12, plus the matching division facts.</p></div>
+    <div><b>Years 5 and 6</b><p>Keep them sharp, and add square numbers in Year 5.</p></div>
+  </div>
+  <p class="small">From the <a href={SRC.nc.u} rel="noopener" target="_blank">national curriculum in England</a>. The DfE's <a href={SRC.guidance.u} rel="noopener" target="_blank">ready-to-progress criteria</a> also ask Year 4 pupils to recognise products as multiples of the corresponding number.</p>
+
+  <h2 id="order">The order to learn them — and why</h2>
+  <p>Don't march from 1 to 12. Each new table should lean on one already known. Our <a href="/times-tables/">times tables hub</a> follows this path:</p>
+  <div class="table-scroll"><table><thead><tr><th scope="col">Stage</th><th scope="col">Tables</th><th scope="col">Why</th></tr></thead><tbody>
+    <tr><td>1</td><td>10, 2, 5</td><td>Clear patterns: add a zero; doubles; numbers ending 0 or 5.</td></tr>
+    <tr><td>2</td><td>4, then 8</td><td>4 is the 2s doubled; 8 is the 4s doubled.</td></tr>
+    <tr><td>3</td><td>3, then 6</td><td>6 is the 3s doubled.</td></tr>
+    <tr><td>4</td><td>9, 11, 12</td><td>9 has digit patterns; 11 is mostly a repeat; 12 = 10 + 2.</td></tr>
+    <tr><td>5</td><td>7</td><td>Leave last — by then almost every fact is already known from elsewhere.</td></tr>
+  </tbody></table></div>
+  <p>Commutativity cuts the load. 3 × 8 is the same as 8 × 3, so a 12 × 12 grid has only 78 different facts, not 144. Colour in what they know and the remaining blank squares look a lot less scary.</p>
+
+  <h2 id="strategies">Worked strategies for tricky facts</h2>
+  <p>Chanting in order builds rhythm, then fails in a mixed check. Teach a way to rebuild a forgotten fact from one they already know.</p>
+
+  <div class="strategy">
+    <h3>Doubling chains (2 → 4 → 8)</h3>
+    <p>If 2 × 7 = 14, then 4 × 7 is double that: 28. Double again for 8 × 7 = 56. Same chain for any factor. Children who are solid on <a href="/doubles/">doubles</a> pick the 4s and 8s up much faster.</p>
+  </div>
+  <div class="strategy">
+    <h3>Derived facts from a known neighbour</h3>
+    <p>Stuck on 6 × 7? Use 5 × 7 = 35 and add one more 7: 42. Stuck on 9 × 8? Use 10 × 8 = 80 and subtract 8: 72. This is how you repair a gap without starting the chant from one.</p>
+  </div>
+  <div class="strategy">
+    <h3>The 9s finger trick (with limits)</h3>
+    <p>Hold both hands up, fingers spread. For 9 × 4, fold down the fourth finger from the left. Fingers to the left of the gap are tens (3), fingers to the right are ones (6): 36. It works for 9 × 1 through 9 × 10. It does <strong>not</strong> help with 9 × 11 or 9 × 12 — learn those separately (99 and 108).</p>
+  </div>
+  <div class="strategy">
+    <h3>Near squares</h3>
+    <p>Squares are tidy anchors: 6² = 36, 7² = 49, 8² = 64. A near square is one away. 7 × 8 is 7 × 7 plus one more 7: 49 + 7 = 56. Or 8 × 8 minus 8: 64 − 8 = 56. Same answer, two routes.</p>
+  </div>
+  <div class="strategy">
+    <h3>A story for one stubborn fact</h3>
+    <p>"5, 6, 7, 8" for 56 = 7 × 8 sticks for a lot of children. Let them invent their own picture for the one fact that keeps slipping. Theirs usually outlasts any rhyme you hand them.</p>
+  </div>
+
+  <h2 id="reference">Quick reference: every table at a glance</h2>
+  <p>Use this like a fridge chart. Cover the answers column and see what comes back instantly. Full charts and a memory tip for each table live on the <a href="/times-tables/">times tables page</a>.</p>
+  <div class="ref-grid"><table><thead><tr><th scope="col">×</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th><th scope="col">6</th><th scope="col">7</th><th scope="col">8</th><th scope="col">9</th><th scope="col">10</th><th scope="col">11</th><th scope="col">12</th></tr></thead><tbody>
+    {[2,3,4,5,6,7,8,9,10,11,12].map((n) => (
+      <tr><th scope="row">{n}</th>{[2,3,4,5,6,7,8,9,10,11,12].map((k) => <td>{n * k}</td>)}</tr>
+    ))}
+  </tbody></table></div>
+  <p class="small">The hardest cells for most children sit around 6×7, 6×8, 7×8, 7×9, 8×9 and the 12s. The STA puts extra weight on the 6, 7, 8, 9 and 12 tables in the Year 4 check.</p>
+
+  <h2 id="term-plan">A term practice plan (about 10 minutes a day)</h2>
+  <p>Assume one new table every week or two, with daily short rounds. Adjust the pace to your child — some need a fortnight on the 7s.</p>
+  <ol>
+    <li><strong>Weeks 1–2:</strong> 10, 2 and 5. Use <a href="/">Practice mode</a> until accuracy stays high, then 60-second timed rounds.</li>
+    <li><strong>Weeks 3–5:</strong> 4, then 8. Explicitly double from the 2s. Keep revisiting 2, 5 and 10 so they don't fade.</li>
+    <li><strong>Weeks 6–8:</strong> 3, then 6. Same doubling idea.</li>
+    <li><strong>Weeks 9–11:</strong> 9, 11, 12. Teach the 9s finger trick and 12 = 10 + 2.</li>
+    <li><strong>Weeks 12–14:</strong> 7, then Mixed. By now 7 × 2, 7 × 5, 7 × 10 and most turnarounds are already known — only a handful of new facts remain.</li>
+    <li><strong>Ongoing:</strong> two Mixed timed rounds and one <a href="/times-tables/#division">division</a> round a few times a week. In Year 4, add an <strong>MTC-style</strong> round once a week.</li>
+  </ol>
+  <p>Five minutes before school, or while tea is cooking, beats a Sunday marathon. Coming back across several days is what moves a fact into long-term memory.</p>
+
+  <h2 id="weak-facts">How to spot which facts are weak</h2>
+  <ol>
+    <li>On the <a href="/">home game</a>, choose one table and <strong>Practice</strong> (untimed). After a wrong tap we show the correct answer. Note every fact that needed the hint.</li>
+    <li>Play a 60-second timed round on the same table. If the score rises but accuracy falls, they're guessing — go back to Practice.</li>
+    <li>Once several tables feel solid, run <strong>MTC style</strong> (25 questions, 6 seconds each). The end screen lists missed facts. Those are tomorrow's drill, not the whole table.</li>
+    <li>Ask the turnaround out loud: if 6 × 8 is known, so is 8 × 6. If only one direction works, it isn't secure yet.</li>
+  </ol>
+  <p>Keep a small notepad of "sticky" facts (often 7 × 8, 6 × 7, 8 × 9, 12 × 7). Quiz just those three or four in the car. Isolating them is more useful than another full chant.</p>
+
+  <h2>Games that aren't a worksheet</h2>
+  <ul>
+    <li><strong>Times-table tennis:</strong> you "serve" a question; they return the answer; keep the rally going.</li>
+    <li><strong>Snap / matching cards:</strong> one pile of questions, one of answers.</li>
+    <li><strong>Football or basketball themes:</strong> same maths, different skin — useful if a child hates "doing tables" but will chase a goal tally. Try the <a href="/sports/">football and basketball themes</a>.</li>
+  </ul>
+
+  <h2 id="mistakes">Mistakes parents often make</h2>
+  <ul class="mistakes">
+    <li><strong>Moving on too soon.</strong> Getting the 6s right once isn't knowing them. Wait until the score stops rising over a few days.</li>
+    <li><strong>Only practising what's already known.</strong> The 2s feel good. Spend most of the session on the hardest table.</li>
+    <li><strong>Long weekend sessions.</strong> Forty minutes on Sunday is less useful than five minutes on five days.</li>
+    <li><strong>Chanting only in order.</strong> Then 7 × 8 means starting from "one seven is seven…". Mix the order early.</li>
+    <li><strong>Turning dinner into a test.</strong> If it becomes an argument, stop and try Practice mode tomorrow.</li>
+  </ul>
+
+  <h2 id="anxiety">When it isn't sticking</h2>
+  <p>Some children freeze when they feel rushed. The EEF describes maths anxiety as separate from general worry, and notes it can appear as early as Key Stage 1 — freezing, fidgeting or avoiding maths. Take the timer off: use Practice mode, one table, and say out loud that mistakes are how facts get learnt. If it carries on, tell the teacher; they may already see it in class.</p>
+  <p>In Year 4, pair this guide with our <a href="/blog/year-4-multiplication-check-practice/">MTC guide</a> for timing, access arrangements and a June countdown.</p>
+  <Sources keys={['nc','guidance','eef','mtcParents','mtcFramework']} />
+</Post>

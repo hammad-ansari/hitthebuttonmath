@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro';
+import { POSTS } from '../../posts';
+---
+<Base title="Maths Practice Blog for Parents and Teachers | Hit the Button Math" description="Clear, practical guides on times tables, number bonds and the Year 4 Multiplication Tables Check for UK parents and primary teachers." crumbs={[{ name: 'Blog', path: '/blog/' }]}>
+  <div class="wrap">
+    <h1><span class="grad-text">Blog</span></h1>
+    <p class="lead">Practical guides for parents and primary teachers in the UK, on helping children get quicker and more confident with number facts.</p>
+    <p>Each guide is checked against official sources such as the national curriculum and the Standards and Testing Agency's guidance on the Year 4 Multiplication Tables Check, and links to them so you can read the originals. New to this? Start with <a href="/blog/times-tables-tips/">how to learn times tables fast</a> (order, strategies, term plan). If your child is in Year 4, read the <a href="/blog/year-4-multiplication-check-practice/">MTC guide</a> (format, access arrangements, June countdown).</p>
+    <div class="grid">{POSTS.map((p, i) => <a class={`card c${i + 2}`} href={p.path}><h2 class="card-title">{p.title}</h2><p>{p.desc}</p></a>)}</div>
+  </div>
+</Base>

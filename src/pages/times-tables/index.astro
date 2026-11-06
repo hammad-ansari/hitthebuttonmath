@@ -1,0 +1,70 @@
+---
+import SkillPage from '../../components/SkillPage.astro';
+import Sources from '../../components/Sources.astro';
+import { SRC } from '../../sources';
+import { TABLES } from '../../tables';
+const facts = Array.from({ length: 12 }, (_, i) => i + 1);
+const faq = [
+  { q: 'What order should children learn times tables in?', a: 'Most schools start with 10, 2 and 5, then 3, 4 and 8, then 6, 9, 11, 12 and finally 7. Each new table builds on one already known: the 4s are doubled 2s, and the 8s are doubled 4s.' },
+  { q: 'How many times table facts are there to learn?', a: 'Up to 12 × 12 there are 144 facts. Because 3 × 8 is the same as 8 × 3, there are only 78 different ones, and the 1, 2, 5 and 10 tables take care of many of those.' },
+  { q: 'When should children know all their times tables?', a: 'The national curriculum for England expects children to recall multiplication and division facts up to 12 × 12 by the end of Year 4, when they take the Multiplication Tables Check.' },
+  { q: 'Which times table is the hardest?', a: 'The Standards and Testing Agency treats the 6, 7, 8, 9 and 12 tables as the most difficult, and gives them the most questions in the Year 4 check. Facts such as 7 × 8 = 56, 6 × 7 = 42 and 12 × 7 = 84 cause the most trouble.' },
+  { q: 'What are division facts and square numbers?', a: 'Division facts are times tables in reverse (from 6 × 7 = 42 you get 42 ÷ 6 = 7). A square number is a number times itself, such as 5² = 25, introduced in Year 5.' },
+];
+
+---
+<SkillPage title="Hit the Button Times Tables – 2 to 12, Division & Square Numbers Game"
+  description="Free Hit the Button times tables game for every table from 2 to 12, plus division and square numbers, with charts and memory tricks for the hardest facts."
+  h1="Hit the Button times tables" path="/times-tables/" crumb="Times tables" mode="tables" option="mixed"
+  answer="<strong>Pick any times table from 2 to 12, or mix them, and hit the right answers before time runs out.</strong> Below you'll find a chart and a memory trick for every table, plus division facts and square numbers."
+  gameHeading="Play times tables" faq={faq}>
+  <nav aria-label="Jump to a table">
+    <h2>Jump to a table</h2>
+    <ul class="pills">{Object.keys(TABLES).map((n) => <li><a href={`#${n}-times-table`}>{n}×</a></li>)}<li><a href="#division">÷ Division</a></li><li><a href="#square-numbers">x² Squares</a></li></ul>
+  </nav>
+  <h2>A sensible order to learn them</h2>
+  <p>Start with the tables that have obvious patterns (10, 2 and 5), then 4 and 8 (doubling), 3 and 6, then 9, 11 and 12. Leave the 7 times table until last. By then almost every fact in it is already known from another table. Stick to one table until the score stops rising, then add it to Mixed. Use 90 seconds while learning and 30 once facts feel secure.</p>
+
+  <h2>What each year group should know</h2>
+  <div class="year-grid">
+    <div><b>Year 2</b><p>2, 5 and 10 times tables, with division facts and odd and even numbers.</p></div>
+    <div><b>Year 3</b><p>3, 4 and 8 times tables. Doubling links the 2s, 4s and 8s.</p></div>
+    <div><b>Year 4</b><p>Every table up to 12 × 12, checked in the June <a href="/blog/year-4-multiplication-check-practice/">Multiplication Tables Check</a>.</p></div>
+    <div><b>Year 5</b><p>Keep the facts secure and use them for square numbers and written methods.</p></div>
+  </div>
+  <p>Behind? That's common. The DfE's <a href={SRC.guidance.u} rel="noopener" target="_blank">Year 4 maths guidance</a> says that if a child doesn't have every fact by the check, facts up to 9 × 9 should come first, because Year 5 written multiplication and division depend on them.</p>
+
+  <h2>Common times tables mistakes</h2>
+  <ul class="mistakes">
+    <li><strong>Neighbour swaps:</strong> 6 × 8 = 48 and 7 × 8 = 56 get muddled, as do 7 × 6 = 42 and 8 × 6 = 48. Practise them side by side.</li>
+    <li><strong>Counting up from the start:</strong> a sign the table was learnt as a chant. Ask facts out of order.</li>
+    <li><strong>Not using the turnaround:</strong> 12 × 3 feels hard until a child sees it's 3 × 12.</li>
+    <li><strong>The 9s finger trick taken too far:</strong> it works up to 9 × 10, not for 9 × 11 or 9 × 12.</li>
+  </ul>
+
+  {Object.entries(TABLES).map(([k, t]) => { const n = +k; return (
+    <section id={`${n}-times-table`} class="table-sec">
+      <h2>{n} times table</h2>
+      <p class="meta">Expected by the end of {t.year}</p>
+      <ol class="facts">{facts.map((f) => <li><span class="q">{n} × {f}</span><span class="a">{n * f}</span></li>)}</ol>
+      <div class="tip"><p><strong>💡 Trick:</strong> {t.tip}</p><p><strong>Pattern:</strong> {t.pattern}</p><p><strong>Watch out:</strong> {t.tricky}</p></div>
+      <p class="sec-actions"><button type="button" class="btn" data-practise={`tables:${n}`}>Practise the {n} times table</button> <button type="button" class="btn alt" data-practise={`division:${n}`}>Practise ÷ {n}</button></p>
+    </section>); })}
+
+  <section id="division" class="table-sec">
+    <h2>Division facts</h2>
+    <p><strong>Division facts are times tables in reverse.</strong> Every multiplication fact gives you three more: from 4 × 9 = 36 you also get 9 × 4 = 36, 36 ÷ 4 = 9 and 36 ÷ 9 = 4. Teachers call this a fact family.</p>
+    <p>Practise division for a table once its multiplication is fairly secure. For 56 ÷ 8, ask "8 times what makes 56?". If division feels slow, go back to the multiplication for a round or two. This game uses exact division only. Remainders come later and use the same facts: 38 ÷ 6 is 6 remainder 2 because 6 × 6 = 36.</p>
+    <p class="sec-actions"><button type="button" class="btn" data-practise="division:mixed">Practise mixed division</button></p>
+  </section>
+
+  <section id="square-numbers" class="table-sec">
+    <h2>Square numbers</h2>
+    <p><strong>A square number is a number multiplied by itself</strong>, written with a small 2: 6² = 6 × 6 = 36. That many counters can be arranged into a perfect square. Square numbers are introduced in Year 5.</p>
+    <ol class="facts">{facts.map((n) => <li><span class="q">{n}²</span><span class="a">{n * n}</span></li>)}</ol>
+    <p>The gaps between squares are the odd numbers: 1, then +3 = 4, +5 = 9, +7 = 16. Forgotten 8²? Add 15 to 49 and you get 64. The ones children forget most are 7² = 49, 8² = 64 and 12² = 144.</p>
+    <p class="sec-actions"><button type="button" class="btn" data-practise="squares">Practise square numbers</button></p>
+  </section>
+  <p>More ideas: <a href="/blog/times-tables-tips/">how to learn times tables fast</a> and our <a href="/blog/year-4-multiplication-check-practice/">Year 4 MTC guide</a>.</p>
+  <Sources keys={['nc','guidance','mtcFramework','mtcParents']} />
+</SkillPage>

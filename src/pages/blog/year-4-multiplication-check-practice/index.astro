@@ -1,0 +1,126 @@
+---
+import Post from '../../../layouts/Post.astro';
+import Sources from '../../../components/Sources.astro';
+import { SRC } from '../../../sources';
+const faq = [
+  { q: 'What is the Multiplication Tables Check?', a: 'A short online check for Year 4 pupils in England: 25 multiplication questions up to 12 × 12, with 6 seconds each and a 3-second pause between them. There is no pass mark.' },
+  { q: 'When is the MTC taken?', a: 'In June. In 2026 the window was 1–12 June, with catch-up 15–19 June. Check GOV.UK each year; the STA updates administration guidance every spring.' },
+  { q: 'Which times tables come up most?', a: 'The 6, 7, 8, 9 and 12 tables get the most questions (2–4 each). The 2 and 10 tables get 0–2; the 1 times table is not tested.' },
+  { q: 'Can my child get extra time?', a: 'No. STA guidance is clear: additional time is not allowed, because the check measures fluent recall. Other access arrangements (colour contrast, font size, Next button, audio, input assistance) may be available through school.' },
+  { q: 'Can my child practise the real MTC screen at home?', a: 'Schools can use STA’s "try it out" check from late April. There is no official public version for home. Our MTC-style mode mirrors timing and table weighting for fluency practice only.' },
+  { q: 'Do parents need to prepare anything?', a: 'STA says parents do not need to do anything extra. Short, calm practice of times tables at home helps if the teacher asks for it.' },
+];
+---
+<Post path="/blog/year-4-multiplication-check-practice/" faq={faq}>
+  <div class="answer"><p><strong>The Year 4 Multiplication Tables Check (MTC) is a short online check in England: 25 multiplication questions up to 12 × 12, with 6 seconds for each one.</strong> It takes place in June and lasts about five minutes. There is no pass mark. The best preparation is a few minutes a day of mixed times tables, with extra time on the 6, 7, 8, 9 and 12 tables — and a calm last month, not a panic week.</p></div>
+
+  <nav class="toc" aria-label="On this page">
+    <h2>On this page</h2>
+    <ol>
+      <li><a href="#how">How the check works</a></li>
+      <li><a href="#weighting">Which tables actually come up</a></li>
+      <li><a href="#six-seconds">Why 6 seconds matters</a></li>
+      <li><a href="#access">Access arrangements (SEND / EAL)</a></li>
+      <li><a href="#plan">A six-week practice plan</a></li>
+      <li><a href="#last-month">The last month before June</a></li>
+      <li><a href="#our-mtc">Using our MTC-style practice</a></li>
+      <li><a href="#behind">If your child isn't there yet</a></li>
+      <li><a href="#results">Results and what they mean</a></li>
+      <li><a href="#mistakes">Mistakes we see most often</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="how">How the check works</h2>
+  <ul>
+    <li>Taken on a computer or tablet at school; about five minutes in total.</li>
+    <li>3 practice questions first, then 25 assessed questions, each written as a sum like 6 × 9.</li>
+    <li>Pupils type or tap the answer. Each question has a <strong>6-second</strong> limit, then a <strong>3-second pause</strong> before the next one.</li>
+    <li>Questions are <strong>not</strong> in order of difficulty — an easy one can follow a hard one.</li>
+    <li>Only multiplication is tested. No division.</li>
+  </ul>
+  <p class="small">Sources: STA <a href={SRC.mtcParents.u} rel="noopener" target="_blank">information for parents</a> and <a href={SRC.mtcAdmin.u} rel="noopener" target="_blank">administration guidance</a> (2026 window: 1–12 June, catch-up 15–19 June; try-it-out from 27 April).</p>
+
+  <h2 id="weighting">Which tables actually come up</h2>
+  <p>The check isn't an even spread. The <a href={SRC.mtcFramework.u} rel="noopener" target="_blank">assessment framework</a> sets how many questions each table can contribute:</p>
+  <table><thead><tr><th scope="col">Times table</th><th scope="col">Questions per check</th></tr></thead><tbody>
+    <tr><td>6, 7, 8, 9, 12</td><td>2 to 4 each</td></tr>
+    <tr><td>3, 4, 5, 11</td><td>1 to 3 each</td></tr>
+    <tr><td>2, 10</td><td>0 to 2 each</td></tr>
+    <tr><td>1</td><td>Not tested</td></tr>
+  </tbody></table>
+  <p>So roughly half the check comes from the five hardest tables. If your child is solid on 2s, 5s and 10s, time spent on the <a href="/times-tables/#7-times-table">7s</a> or <a href="/times-tables/#8-times-table">8s</a> will move the score more than another round of doubles.</p>
+
+  <h2 id="six-seconds">Why 6 seconds matters</h2>
+  <p>Six seconds is enough to recall a fact and enter it. It isn't really enough to count up in sevens and then type. A child who can work 7 × 8 out given a minute may still score zero on that item in the check. That's the point: the MTC is looking for facts that are already automatic.</p>
+  <p>Worked example: the screen shows <strong>7 × 8</strong>. Routes that fit inside 6 seconds:</p>
+  <ul>
+    <li>Instant recall: 56.</li>
+    <li>Near square: 7 × 7 = 49, plus 7 = 56.</li>
+    <li>Doubling chain: 7 × 4 = 28, double = 56.</li>
+  </ul>
+  <p>Counting 7, 14, 21… usually doesn't finish in time. More rebuild strategies in our <a href="/blog/times-tables-tips/">times tables tips</a>.</p>
+
+  <h2 id="access">Access arrangements (SEND, EAL and other needs)</h2>
+  <p>Schools can enable arrangements without asking the STA for permission. Support should match normal classroom practice and must not advantage the pupil. Familiarise using the school's "try it out" check first. From the <a href={SRC.mtcAdmin.u} rel="noopener" target="_blank">administration guidance</a>:</p>
+  <table><thead><tr><th scope="col">Arrangement</th><th scope="col">What it does</th></tr></thead><tbody>
+    <tr><td>Colour contrast</td><td>Yellow on black, black on blue, black on peach, or blue on cream</td></tr>
+    <tr><td>Font size</td><td>Larger or smaller text and number pad</td></tr>
+    <tr><td>Pause — "Next" button</td><td>Pupil starts the next question when ready (does <em>not</em> add seconds to answer). 30-minute overall limit</td></tr>
+    <tr><td>Remove onscreen number pad</td><td>Keyboard only — useful if the pad distracts</td></tr>
+    <tr><td>Input assistance</td><td>An adult types answers the pupil dictates (not a relative or another pupil)</td></tr>
+    <tr><td>Audio version</td><td>Reads instructions and questions aloud (headphones or a separate room)</td></tr>
+    <tr><td>Audible time alert</td><td>Beep 2 seconds before time is up — helps if the on-screen timer isn't visible</td></tr>
+  </tbody></table>
+  <p><strong>Additional time for each question is not allowed.</strong> STA states that clearly: extra seconds would remove the fluent-recall purpose of the check.</p>
+  <p>If you're worried, talk to the class teacher or SENCO with a concrete description ("they freeze when the timer appears", "they need a larger font in class"). Ask which arrangements will be tried in the April "try it out" check. Some pupils should not take the check at all — for example if they cannot access it even with arrangements, or are working below Year 2 expectations in multiplication. The headteacher decides; school should explain the decision to parents.</p>
+
+  <h2 id="plan">A simple six-week practice plan</h2>
+  <ol>
+    <li><strong>Week 1:</strong> find the gaps. One 60-second round of each <a href="/times-tables/">times table</a> on our game, or a Practice round per table. Note the lowest scores and any facts that needed the hint.</li>
+    <li><strong>Weeks 2–4:</strong> the two or three weakest tables. Practice mode first, then 60 seconds. Quiz stubborn facts out of order: "What's 8 × 7? And 7 × 8?"</li>
+    <li><strong>Week 5:</strong> Mixed tables. Accuracy should be high before you chase speed.</li>
+    <li><strong>Week 6:</strong> Mixed at 30 seconds, keyboard typing, plus two <strong>MTC-style</strong> rounds (see below).</li>
+  </ol>
+  <p>Five to ten minutes on most days is enough. Long sessions the weekend before the check rarely help and often raise anxiety.</p>
+
+  <h2 id="last-month">The last month before June</h2>
+  <p>Use this as a calm countdown, not a boot camp. Exact June dates change each year — confirm on GOV.UK.</p>
+  <table><thead><tr><th scope="col">When</th><th scope="col">Focus</th></tr></thead><tbody>
+    <tr><td>4 weeks out</td><td>Hardest tables only (6, 7, 8, 9, 12). Drop easy tables from daily practice.</td></tr>
+    <tr><td>From late April</td><td>Ask school when the "try it out" check will run. Your child should use the same device and input method they'll use in June.</td></tr>
+    <tr><td>2 weeks out</td><td>Two short Mixed or MTC-style rounds most days. Stop if accuracy collapses — go back to Practice on one table.</td></tr>
+    <tr><td>Final week</td><td>Light practice only. Sleep and ordinary school routines matter more than another late-night drill.</td></tr>
+    <tr><td>Check week</td><td>No need for home "mocks" the night before. Trust the school routine.</td></tr>
+  </tbody></table>
+
+  <h2 id="our-mtc">Using our MTC-style practice</h2>
+  <p>On the <a href="/">home page</a> game, choose round type <strong>MTC style</strong>. It asks 25 mixed multiplication questions (tables 2–12), weighted toward the harder tables, with 6 seconds each and a 3-second pause. At the end we list any facts you missed.</p>
+  <p>What it is: fluency practice with similar timing and balance. What it is <strong>not</strong>: the official STA check. The real screen, PINs, and access arrangements only exist inside the school MTC service. Don't treat a home score as a predicted mark.</p>
+  <p>Typing answers on a keyboard is closer to many school setups than tapping buttons. The STA notes that keyboard or touchscreen may suit Year 4 pupils better than a mouse for this kind of timed task — school should decide based on normal classroom practice.</p>
+
+  <h2 id="behind">If your child isn't there yet</h2>
+  <p>Plenty of children still have gaps in June. The DfE's <a href={SRC.guidance.u} rel="noopener" target="_blank">Year 4 maths guidance</a> says that for pupils without automatic recall of every fact, prioritise facts up to <strong>9 × 9</strong>, because Year 5 written multiplication and division lean on them. The 11s and 12s can follow.</p>
+  <p>STA also says parents do not need to do anything extra to prepare. If practice at home is making your child distressed, pause it and tell the teacher. A smaller focus ("these four facts, this method") beats an hour of tears.</p>
+
+  <h2 id="results">Results and what they mean</h2>
+  <ul>
+    <li>There is <strong>no pass mark</strong> and no expected standard.</li>
+    <li>The teacher shares the score out of 25 with parents.</li>
+    <li>Schools use results to spot who needs more support. DfE publishes national and local authority statistics, not school league tables for the MTC.</li>
+    <li>A lower score is information, not a verdict on your child as a mathematician.</li>
+  </ul>
+
+  <h2 id="mistakes">Mistakes we see most often</h2>
+  <ul class="mistakes">
+    <li><strong>Only chanting in order.</strong> The check asks facts mixed up.</li>
+    <li><strong>Practising easy tables most.</strong> The 6, 7, 8, 9 and 12 tables carry more of the check.</li>
+    <li><strong>Racing and guessing.</strong> A fast wrong answer scores nothing. Watch accuracy.</li>
+    <li><strong>Forgetting the turnaround.</strong> If 4 × 12 is known, so is 12 × 4.</li>
+    <li><strong>Assuming extra time is available.</strong> It isn't — ask about the arrangements that <em>are</em> allowed instead.</li>
+  </ul>
+
+  <h2>Keep it calm</h2>
+  <p>The MTC isn't a pass-or-fail test. Some children still get anxious about anything timed. The Education Endowment Foundation's <a href={SRC.eef.u} rel="noopener" target="_blank">guidance</a> notes that maths anxiety can overload working memory, so a worried child may freeze on facts they know. If you see that, use Practice mode, drop the pressure, and praise accuracy for a while.</p>
+  <p class="small">The 2026–27 arrangements were unchanged at the time of writing, but the STA says future arrangements are under review after the Curriculum and Assessment Review. We'll update this page when official guidance changes.</p>
+  <Sources keys={['mtcParents','mtcAdmin','mtcFramework','guidance','nc','eef']} />
+</Post>

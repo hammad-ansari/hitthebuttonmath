@@ -1,0 +1,96 @@
+---
+import Base from '../../layouts/Base.astro';
+import Faq from '../../components/Faq.astro';
+import { faqSchema } from '../../lib';
+import Sources from '../../components/Sources.astro';
+import Author from '../../components/Author.astro';
+import { SRC } from '../../sources';
+const faq = [
+  { q: 'Do pupils need accounts?', a: 'No. There are no logins and we do not collect pupil data. Best scores stay in the browser on that device.' },
+  { q: 'Will it work on Chromebooks, iPads and whiteboards?', a: 'Yes. It runs in any modern browser. Buttons are large enough for whiteboard taps and whole-class starters.' },
+  { q: 'Is this the same as the official MTC practice?', a: 'No. Schools should use the STA "try it out" check for the real screen. Our MTC-style mode is general fluency practice with similar timing and weighting.' },
+  { q: 'Are there adverts?', a: 'The site may show a small number of ads away from the game area to cover running costs. Child-directed / non-personalised treatment is described in the privacy policy.' },
+];
+
+---
+<Base title="Hit the Button for Teachers – Classroom Ideas and Starters" description="How teachers can use our free Hit the Button style game in class: starters, interventions, homework, MTC preparation and tracking progress without logins." crumbs={[{ name: 'Teachers', path: '/teachers/' }]} schema={[faqSchema(faq)]}>
+  <div class="wrap prose">
+    <h1><span class="grad-text">Hit the Button for teachers</span></h1>
+    <div class="answer"><p><strong>A free, no-login fluency game for Reception to Year 6</strong> that works on whiteboards, Chromebooks and tablets. Use it as a starter, for interventions or as homework, and track progress with the end-of-round score and accuracy.</p></div>
+    <h2>Ideas for the classroom</h2>
+    <h3>Whole-class starter (5 minutes)</h3>
+    <p>Put a 60-second round on the board and let pupils take turns to tap, or have the class shout answers while one child plays. Change the table each day to match your fluency focus.</p>
+    <h3>Daily fluency slot</h3>
+    <p>Many schools run a short daily maths fluency session. One round each of <a href="/number-bonds/">bonds</a>, <a href="/doubles/">doubles</a> and a <a href="/times-tables/">times table</a> fits neatly into ten minutes.</p>
+    <h3>Interventions</h3>
+    <p>For a pupil who's stuck on one table, set the 90-second level on that table alone and record their score each session. Moving from 15 to 25 over a fortnight is a progress story the child can see.</p>
+    <h3>Year 4 MTC preparation</h3>
+    <p>Mixed tables at the 30-second setting is good practice for quick recall. Read our <a href="/blog/year-4-multiplication-check-practice/">guide to the Multiplication Tables Check</a> for how the real check works.</p>
+    <h2>Suggested skills by year group</h2>
+    <p>Mapped to the DfE's <a href={SRC.guidance.u} rel="noopener" target="_blank">ready-to-progress criteria</a> and the <a href={SRC.nc.u} rel="noopener" target="_blank">national curriculum</a>:</p>
+    <table><thead><tr><th scope="col">Year</th><th scope="col">Fluency focus</th><th scope="col">Game settings</th></tr></thead><tbody>
+      <tr><td>Reception</td><td>Bonds to 5, some bonds to 10, some doubles (ELG)</td><td>Bonds to 10, doubles, 90 s</td></tr>
+      <tr><td>Y1</td><td>Add and subtract within 10 (1NF–1); count in 2s, 5s, 10s</td><td>Bonds to 10, doubles</td></tr>
+      <tr><td>Y2</td><td>Secure facts within 10 (2NF–1); know bonds to 20; 2, 5, 10 tables</td><td>Bonds to 20, 2/5/10 tables, halves</td></tr>
+      <tr><td>Y3</td><td>Facts that bridge 10 (3NF–1); 10, 5, 2, 4 and 8 tables (3NF–2)</td><td>3, 4, 8 tables, bonds to 100</td></tr>
+      <tr><td>Y4</td><td>All facts to 12 × 12 and division facts (4NF–1)</td><td>Single tables, then Mixed and division</td></tr>
+      <tr><td>Y5 / Y6</td><td>Keep table facts secure (5NF–1); square numbers (Y5)</td><td>Mixed at 30 s, squares</td></tr>
+    </tbody></table>
+
+    <h2>What the MTC guidance says that's useful in class</h2>
+    <ul>
+      <li>The check is 25 questions with 6 seconds each and a 3-second pause between them. The 2026 window ran from 1 to 12 June (<a href={SRC.mtcAdmin.u} rel="noopener" target="_blank">administration guidance</a>).</li>
+      <li>The <a href={SRC.mtcFramework.u} rel="noopener" target="_blank">assessment framework</a> puts more weight on the 6, 7, 8, 9 and 12 tables. Each form has 2 to 4 questions from each of those, and only 0 to 2 from the 2s and 10s. The 1 times table isn't tested.</li>
+      <li>For pupils who won't be fluent to 12 × 12 in time, the DfE's year 4 guidance says to prioritise facts up to 9 × 9, because those are needed for written multiplication and division in Year 5.</li>
+      <li>The STA's "try it out" check on the MTC service is the best way to get pupils used to the real screen.</li>
+    </ul>
+
+    <h2>Keep timed practice low-stakes</h2>
+    <p>The EEF's <a href={SRC.eef.u} rel="noopener" target="_blank">KS2 and KS3 guidance</a> supports building quick recall of number facts. It also flags maths anxiety: it can overload working memory and shows up even in KS1, through freezing, fidgeting or avoiding maths. In practice, that means letting anxious pupils use the 90-second setting, not displaying class rankings, and comparing each child only with their own last score. Scores here never leave the device, so there's no leaderboard to worry about.</p>
+
+    <h2>If your school runs Mastering Number</h2>
+    <p>The NCETM's <a href={SRC.ncetm.u} rel="noopener" target="_blank">Mastering Number</a> programme uses a short daily fluency session in Reception to Year 2, built on number sense and the rekenrek. This game doesn't replace that. It works best afterwards, as a quick way for children to retrieve the facts they've just reasoned about.</p>
+
+    <h2 id="printables">Printable classroom sheets</h2>
+    <p>Two one-page sheets you can print or download as a PDF. Fill them in by hand — nothing is saved on our servers.</p>
+    <p><a class="btn" href="/teachers-printables.pdf">Download PDF (starter + tracker)</a> · <a class="btn alt" href="#printables" id="print-sheets">Print sheets</a></p>
+
+    <div class="print-pack">
+      <section class="print-sheet" id="starter-sheet" aria-labelledby="starter-h">
+        <h3 id="starter-h">5-minute fluency starter</h3>
+        <p class="small">Class / group: ______________ &nbsp; Date: ______________ &nbsp; Focus table or bond: ______________</p>
+        <ol>
+          <li><strong>Minute 1 — warm-up:</strong> one easy round (2s, 5s, 10s or bonds to 10) on the whiteboard. Class call answers.</li>
+          <li><strong>Minutes 2–3 — drill:</strong> this week's focus on <a href="/">hitthebuttonmath.com</a>. Use Practice (untimed) if anyone freezes.</li>
+          <li><strong>Minutes 4–5 — challenge:</strong> Mixed or MTC style for Year 4; one child plays, others write answers on whiteboards.</li>
+        </ol>
+        <p><strong>Notes / who struggled:</strong></p>
+        <div class="write-lines" aria-hidden="true"><span></span><span></span></div>
+        <p class="small">Tip: change only the focus each day; keep the three-part shape the same.</p>
+      </section>
+
+      <section class="print-sheet" id="tracker-sheet" aria-labelledby="tracker-h">
+        <h3 id="tracker-h">Intervention progress tracker</h3>
+        <p class="small">Pupil: ______________ &nbsp; Skill (e.g. 7× table): ______________ &nbsp; Setting: Practice / 90s / 60s (circle)</p>
+        <div class="tracker-wrap">
+          <table class="tracker">
+            <thead><tr><th scope="col">Date</th><th scope="col">Score</th><th scope="col">Accuracy %</th><th scope="col">Sticky facts noticed</th><th scope="col">Next step</th></tr></thead>
+            <tbody>
+              {[1,2,3,4,5,6,7,8].map(() => <tr><td></td><td></td><td></td><td></td><td></td></tr>)}
+            </tbody>
+          </table>
+        </div>
+        <p class="small">Aim: same settings each session so the score is comparable. Celebrate a climb from 15 → 25 more than a one-off high score with lots of guesses.</p>
+      </section>
+    </div>
+
+    <h2>Sharing with families</h2>
+    <p>Send home the link <code>hitthebuttonmath.com</code> along with the table your class is working on. The <a href="/blog/times-tables-tips/">times tables tips for parents</a> post explains how parents can help without turning it into a battle.</p>
+    <Author />
+    <Faq items={faq} />
+    <Sources keys={['nc','guidance','elg','mtcAdmin','mtcFramework','eef','ncetm']} />
+  </div>
+  <script is:inline>
+  document.getElementById('print-sheets')?.addEventListener('click', function(e){ e.preventDefault(); window.print(); });
+  </script>
+</Base>

@@ -1,0 +1,113 @@
+---
+import Base from '../layouts/Base.astro';
+import Game from '../components/Game.astro';
+import Faq from '../components/Faq.astro';
+import Related from '../components/Related.astro';
+import Author from '../components/Author.astro';
+import { SITE } from '../site';
+import { appSchema, faqSchema, personSchema, organizationSchema } from '../lib';
+const title = 'Hit the Button Maths Game – Free Times Tables & Number Bonds Practice';
+const description = 'Free Hit the Button style maths game: quick-fire times tables, number bonds, doubles, halves, division and square numbers for primary children. No sign-up.';
+const faq = [
+  { q: 'What is Hit the Button?', a: 'Hit the Button is a style of quick-fire maths game. A question appears and you tap or type the answer. On this site you can play timed rounds, an untimed Practice mode, or an MTC-style check of 25 questions.' },
+  { q: 'Is this the official Topmarks Hit the Button game?', a: 'No. This is an independent, original game. We are not linked to Topmarks. See our disclaimer.' },
+  { q: 'Is it free, and do I need to log in?', a: 'Yes, it is free. There is no login or account. Best scores stay in your browser on your device.' },
+  { q: 'What age is it for?', a: 'Most children who use it are between 5 and 11. Number bonds and doubles suit Reception and Key Stage 1; times tables, division and squares suit Years 3 to 6.' },
+  { q: 'What is Practice mode and MTC style?', a: 'Practice is untimed: after a wrong answer we show the correct one and keep a running accuracy score. MTC style asks 25 mixed multiplication questions with 6 seconds each and a 3-second pause, weighted like the STA framework. It is practice only, not the official check.' },
+  { q: 'What is a good score?', a: 'There is no official benchmark. Our rough guide for a 90-second timed round (from automated test runs of the game, not children): under 25 still working facts out, 25–45 getting there, 45–60 confident, 60+ instant recall. Beat your own best rather than comparing with others.' },
+  { q: 'Is there an app?', a: 'This site has no app — it runs in any browser. Topmarks sells a separate official Hit the Button Maths app.' },
+];
+import Sources from '../components/Sources.astro';
+import { SRC } from '../sources';
+---
+<Base title={title} description={description} schema={[organizationSchema(), personSchema(), 
+  { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.url + '/', inLanguage: 'en-GB' },
+  appSchema('Hit the Button Maths Game', '/', description), faqSchema(faq)]}>
+  <div class="hero-band home-hero"><div class="wrap">
+    <span class="eyebrow">★ Free maths game for ages 5–11</span>
+    <h1>Hit the Button <span class="grad-text">maths game</span></h1>
+    <div class="answer">
+      <p><strong>Pick a skill, start the timer and hit the right answer as fast as you can.</strong> It's a free, quick-fire maths game for primary children covering times tables 2–12, number bonds to 10, 20 and 100, doubles, halves, division facts and square numbers. It works on any device, with no sign-up.</p>
+    </div>
+    <ul class="chips" aria-label="Highlights"><li>⏱ 30, 60 or 90 seconds</li><li>🎯 6 skills</li><li>⌨️ Touch &amp; keyboard</li><li>🏆 Personal bests</li></ul>
+  </div></div>
+  <div class="wrap">
+    <Game heading="Play Hit the Button" />
+    <p class="game-disclaimer">Independent Hit the Button <em>style</em> game — not affiliated with Topmarks. <a href="/disclaimer/">Disclaimer</a>.</p>
+
+    <section class="prose">
+      <div class="tip"><h2>Why short, fast games work</h2>
+      <p>Children who can recall facts like 7 × 8 or 6 + 4 instantly have more brain space left for the harder parts of a problem. That's why primary teachers talk about "fluency". One-minute bursts suit how children concentrate: the round is over before boredom sets in, and a score gives them something to beat next time.</p>
+      <p>The trick is little and often. Two or three rounds a day will do more than a long session once a week.</p>
+      <p>This isn't just our opinion. The Education Endowment Foundation's <a href={SRC.eef.u} rel="noopener" target="_blank">maths guidance</a> says quick retrieval of number facts, including number bonds and multiples, is important for later success. The same report warns that maths anxiety can overload working memory, so keep rounds friendly: no one needs to beat anyone but themselves.</p></div>
+
+      <h2 id="which-mode">Which mode for which age</h2>
+      <table><thead><tr><th scope="col">Year</th><th scope="col">Best modes</th></tr></thead><tbody>
+        <tr><td>Reception</td><td><a href="/number-bonds/">Bonds to 10</a> (aim: bonds to 5 by heart), small <a href="/doubles/">doubles</a></td></tr>
+        <tr><td>Year 1</td><td>Bonds to 10 and 20, doubles and halves to 10</td></tr>
+        <tr><td>Year 2</td><td>Bonds to 20, <a href="/times-tables/#2-times-table">2</a>, <a href="/times-tables/#5-times-table">5</a> and <a href="/times-tables/#10-times-table">10 tables</a>, <a href="/doubles/#halves">halves</a></td></tr>
+        <tr><td>Year 3</td><td><a href="/times-tables/#3-times-table">3</a>, <a href="/times-tables/#4-times-table">4</a> and <a href="/times-tables/#8-times-table">8 tables</a>, bonds to 100</td></tr>
+        <tr><td>Year 4</td><td>Every table to 12 × 12, <a href="/times-tables/#division">division</a>, then Mixed</td></tr>
+        <tr><td>Years 5–6</td><td>Mixed tables and division at 30 s, <a href="/times-tables/#square-numbers">squares</a> (Year 5)</td></tr>
+      </tbody></table>
+      <p class="small">Year groups follow the <a href={SRC.nc.u} rel="noopener" target="_blank">national curriculum in England</a>. If your child is in Year 4, the <a href={SRC.mtcParents.u} rel="noopener" target="_blank">Multiplication Tables Check</a> in June asks 25 questions with 6 seconds each.</p>
+      <p>Does your child love sport? Try the <a href="/sports/">football and basketball themes</a>, where every right answer scores a goal or a basket.</p>
+
+      <section id="good-score" class="table-sec">
+      <h2>What's a good score?</h2>
+      <p><strong>There's no official benchmark. This is our own rough guide for a 90-second round.</strong> Your score is roughly 90 divided by how many seconds each answer takes you. These bands come from <strong>automated test runs of the game</strong> (a script answering at fixed speeds — not scores from children): every 4 seconds scored 22, every 2.5 seconds 35, every 1.5 seconds 59 and every second 89.</p>
+      <table><thead><tr><th scope="col">90 s score</th><th scope="col">Roughly means</th></tr></thead><tbody>
+        <tr><td>Under 25</td><td>Still working facts out. Stick with one table or bond.</td></tr>
+        <tr><td>25–45</td><td>Getting there. Most answers take 2–3 seconds.</td></tr>
+        <tr><td>45–60</td><td>Confident. Try Mixed or the 60 s setting.</td></tr>
+        <tr><td>60+</td><td>Instant recall, well inside the MTC's 6 seconds.</td></tr>
+      </tbody></table>
+      <p>Mixed tables score lower than a single table, and younger children tap more slowly, so don't compare a Year 2 child with a Year 6 one, or siblings with each other. The number that matters is your own best, saved on your device. Going from 20 to 28 in a fortnight is real progress, as long as accuracy stays high.</p>
+      </section>
+
+      <div class="grid2">
+      <section><h2>For parents</h2><ul>
+        <li><strong>Ask what's being taught.</strong> Practise the same table as school this half term. The <a href="/times-tables/">times tables page</a> has a trick for each one.</li>
+        <li><strong>Five minutes, most days.</strong> Two rounds before school beats an hour on Sunday. See our <a href="/blog/times-tables-tips/">tips for learning tables fast</a>.</li>
+        <li><strong>If they freeze, slow down.</strong> Switch to 90&nbsp;s or <a href="/doubles/">doubles</a> and praise accuracy, not speed.</li>
+      </ul></section>
+      <section><h2>For teachers</h2><ul>
+        <li><strong>Five-minute starter:</strong> one round on the whiteboard, class calling answers.</li>
+        <li><strong>Intervention tracking:</strong> one table, 90&nbsp;s, the same setting each session. Log the score. See <a href="/teachers/">ideas for teachers</a>.</li>
+        <li><strong>Year 4:</strong> weight practice towards the 6, 7, 8, 9 and 12 tables, as the <a href="/blog/year-4-multiplication-check-practice/">MTC</a> does.</li>
+      </ul></section>
+      </div>
+
+      <section id="how-to-play" class="table-sec">
+      <h2>How to play Hit the Button</h2>
+      <p><strong>Choose a skill, press Start, and tap the correct answer to each question before the timer runs out.</strong> One correct answer is one point. Wrong taps don't lose points, but you stay on the question until you get it right, and they lower your accuracy.</p>
+      <ol>
+        <li><strong>Choose your challenge:</strong> times tables, number bonds, doubles, halves, division or square numbers.</li>
+        <li><strong>Narrow it down:</strong> pick a single table (2–12) or Mixed, or bonds to 10, 20 or 100.</li>
+        <li><strong>Pick a round type:</strong> Practice (untimed), 90 / 60 / 30 seconds, or MTC style (25 questions, 6 seconds each).</li>
+        <li><strong>Play:</strong> the question appears on the screen and the answers appear as round buttons. Hit the right one.</li>
+        <li><strong>Review:</strong> you'll see your score, accuracy, stars and whether you beat your best.</li>
+      </ol>
+      <h3>Controls</h3>
+      <table><tbody>
+        <tr><th scope="row">Touch or mouse</th><td>Tap the answer button</td></tr>
+        <tr><th scope="row">Number keys + Enter</th><td>Type the answer and submit</td></tr>
+        <tr><th scope="row">Tab, then Space/Enter</th><td>Move between buttons and press one</td></tr>
+        <tr><th scope="row">Backspace / Escape</th><td>Delete a digit / end the round early</td></tr>
+      </tbody></table>
+      <h3>Tips for better scores</h3>
+      <ul>
+        <li>Accuracy first. Twenty right with no wrong taps teaches more than 25 with lots of guesses.</li>
+        <li>On a single table the buttons are always in order, so your eyes learn where to jump.</li>
+        <li>Play a couple of rounds at a time, then stop. Short and regular beats long and rare.</li>
+      </ul>
+      </section>
+    </section>
+
+    <Related title="All Hit the Button games" exclude="/#how-to-play" />
+    <Author />
+    <Faq items={faq} />
+    <Sources keys={['nc','elg','mtcParents','eef']} />
+    <p class="small">Inspired by the classic Hit the Button idea. An independent site, not affiliated with Topmarks. <a href="/disclaimer/">Read our disclaimer</a>.</p>
+  </div>
+</Base>

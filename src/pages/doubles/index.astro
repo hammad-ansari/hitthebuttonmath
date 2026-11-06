@@ -1,0 +1,57 @@
+---
+import SkillPage from '../../components/SkillPage.astro';
+import Sources from '../../components/Sources.astro';
+import { SRC } from '../../sources';
+const faq = [
+  { q: 'What does doubling and halving mean?', a: 'Doubling means adding a number to itself (or ×2). Halving means splitting into two equal parts (or ÷2). Double 8 is 16; half of 16 is 8.' },
+  { q: 'When do children learn doubles and halves?', a: 'Reception includes some double facts. Year 1 notes mention doubling and finding half. Year 3 uses doubling to connect the 2, 4 and 8 times tables.' },
+  { q: 'What are near doubles?', a: 'Additions where the numbers are one apart, such as 7+8. Double the smaller and add one: double 7 is 14, so 7+8 is 15.' },
+  { q: 'Which numbers does the game use?', a: 'Doubles of 1 to 20 (answers 2 to 40) and halves of even numbers from 2 to 40 (answers 1 to 20).' },
+];
+
+---
+<SkillPage title="Hit the Button Doubles and Halves – Free Doubling & Halving Game"
+  description="Free Hit the Button style doubles and halves game. Double numbers to 20 and halve even numbers to 40 against the clock, with simple mental maths methods."
+  h1="Doubles and halves" path="/doubles/" crumb="Doubles and halves" mode="doubles"
+  answer="<strong>To double a number, add it to itself. To halve it, split it into two equal parts.</strong> Double 7 is 14, and half of 14 is 7. Choose Doubles or Halves below and race the clock."
+  gameHeading="Play doubles and halves" faq={faq}>
+  <h2 id="doubles">Doubles to learn first</h2>
+  <ol class="facts">{[1,2,3,4,5,6,7,8,9,10].map((n) => <li><span class="q">double {n}</span><span class="a">{n * 2}</span></li>)}</ol>
+  <h2>Doubling numbers from 11 to 20</h2>
+  <p>Partition the number. For double 16, double the 10 to get 20 and double the 6 to get 12, then add: 20 + 12 = 32. After a few rounds most children stop needing to do this and simply know it.</p>
+  <div class="tip"><p><strong>💡 Where doubles lead:</strong> doubling is the <a href="/times-tables/#2-times-table">2 times table</a>. Double twice for the <a href="/times-tables/#4-times-table">4 times table</a>, and three times for the <a href="/times-tables/#8-times-table">8 times table</a>.</p></div>
+  <h2 id="halves">Halves are doubles backwards</h2>
+  <p>If your child knows double 8 is 16, they also know half of 16 is 8. That's why playing doubles first and halves straight after works so well. In the game, pick <strong>Halves</strong> under "Choose your challenge".</p>
+  <h3>Halves to learn first</h3>
+  <ol class="facts">{[2,4,6,8,10,12,14,16,18,20].map((n) => <li><span class="q">half of {n}</span><span class="a">{n / 2}</span></li>)}</ol>
+  <p class="sec-actions"><button type="button" class="btn alt" data-practise="halves">Practise halves</button></p>
+  <h2>Halving tens numbers</h2>
+  <p>Numbers like 30, 50 and 70 catch children out. Think of 30 as 20 + 10: half of 20 is 10, half of 10 is 5, so half of 30 is 15.</p>
+  <h2>Where halves turn up</h2>
+  <p>Sharing sweets fairly, cutting a recipe in half, working out half price in a sale. Halving is also the first step to quarters (halve, then halve again) and to <a href="/times-tables/#division">division</a>.</p>
+  <h2>Near doubles: the shortcut that pays off</h2>
+  <p>Once doubles are secure, a whole set of additions gets easier. Children who spot this stop counting on for sums that bridge 10, which the DfE's <a href={SRC.guidance.u} rel="noopener" target="_blank">ready-to-progress criteria</a> expect to be fluent in Year 3.</p>
+  <div class="strategy">
+    <h3>Worked example: 6 + 7</h3>
+    <p>6 and 7 are one apart. Double the smaller number: double 6 = 12. Then add the extra 1 → <strong>13</strong>. (Or double 7 = 14 and take 1 off.)</p>
+  </div>
+  <div class="strategy">
+    <h3>Worked example: 8 + 9</h3>
+    <p>Double 8 = 16, plus 1 = <strong>17</strong>. Same idea for 5 + 6 (double 5 + 1 = 11) and 9 + 10 (double 9 + 1 = 19).</p>
+  </div>
+
+  <h2>Where it fits in school</h2>
+  <ul>
+    <li><strong>Reception:</strong> some double facts are part of the <a href={SRC.elg.u} rel="noopener" target="_blank">Number Early Learning Goal</a>, alongside bonds to 5.</li>
+    <li><strong>Year 1:</strong> the <a href={SRC.nc.u} rel="noopener" target="_blank">national curriculum</a> notes mention doubling and finding half of objects and quantities.</li>
+    <li><strong>Year 3:</strong> pupils use doubling to link the 2, 4 and 8 times tables.</li>
+  </ul>
+
+  <h2>Common mistakes</h2>
+  <ul class="mistakes">
+    <li><strong>Doubling only the tens.</strong> Double 16 written as 26 means the child doubled the 1 and forgot to double the 6 (or the other way round). Say it as "double 10, double 6".</li>
+    <li><strong>Halving odd tens.</strong> Half of 50 given as 20 or 30 is very common. Split it as 40 + 10: half is 20 + 5 = 25.</li>
+    <li><strong>Confusing halving with taking 2 away.</strong> Younger children sometimes say half of 10 is 8. Share 10 counters into two piles to show it.</li>
+  </ul>
+  <Sources keys={['elg','nc','guidance']} />
+</SkillPage>

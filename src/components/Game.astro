@@ -1,0 +1,398 @@
+---
+import { ICONS } from '../icons';
+interface Props { mode?: string; option?: string; theme?: 'classic' | 'football' | 'basketball'; heading?: string; themeSwitch?: boolean }
+const { mode = 'tables', option = 'mixed', theme = 'classic', heading = 'Play now', themeSwitch = false } = Astro.props;
+const modes = [
+  ['tables', 'Times tables', '2 to 12', '#6d3df5', '7×8 · Year 4'], ['bonds', 'Number bonds', '10, 20, 100', '#ff3d8b', '6+?=10 · Rec–Y2'], ['doubles', 'Doubles', 'up to 20', '#0fae88', 'double 8 · Y1–2'],
+  ['halves', 'Halves', 'up to 40', '#2f7fff', 'half of 18 · Y1–2'], ['division', 'Division', '2 to 12', '#ff7a1a', '56÷8 · Year 4'], ['squares', 'Squares', '1² to 12²', '#c026d3', '7² · Year 5'],
+];
+const tables = ['mixed', 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+const defTime = theme === 'classic' ? '60' : '90';
+---
+<section class={`console theme-${theme}`} data-mode={mode} data-theme={theme} aria-labelledby="game-h">
+  <div class="c-top">
+    <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+    <h2 id="game-h">{heading}</h2>
+    <span class="best-badge" aria-live="polite"><span set:html={ICONS.star} /> Best <b class="g-bestnum">0</b></span>
+  </div>
+
+  <div class="g-setup">
+    <fieldset>
+      <legend>Choose your challenge</legend>
+      <div class="modes">
+        {modes.map(([v, l, sub, c, ex]) => (
+          <label class="mode" style={`--c:${c}`}>
+            <input type="radio" name="g-mode" value={v} checked={v === mode} />
+            <span class="mode-in"><span class="m-ico" set:html={ICONS[v]} /><span class="m-name">{l}</span><span class="m-sub">{sub}</span><span class="m-ex">{ex}</span></span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+    {themeSwitch && (
+      <fieldset class="theme-switch">
+        <legend>Sport theme</legend>
+        <label><input type="radio" name="g-theme" value="football" checked={theme === 'football' || theme === 'classic'} /><span><b>Football</b> Goals</span></label>
+        <label><input type="radio" name="g-theme" value="basketball" checked={theme === 'basketball'} /><span><b>Basketball</b> Baskets</span></label>
+      </fieldset>
+    )}
+    <div class="g-row">
+      <label class="g-opt sel" data-for="tables division"><span>Table</span>
+        <select name="g-table">{tables.map((t) => <option value={String(t)} selected={String(t) === option}>{t === 'mixed' ? 'Mixed 2–12' : `${t} times table`}</option>)}</select>
+      </label>
+      <label class="g-opt sel" data-for="bonds"><span>Bonds to</span>
+        <select name="g-bond">{['10', '20', '100'].map((b) => <option value={b} selected={b === option}>{b}</option>)}</select>
+      </label>
+      <fieldset class="times"><legend>Round type</legend>
+        {[['practice', 'Practice', 'Untimed'], ['90', 'Steady', '90s'], ['60', 'Classic', '60s'], ['30', 'Speedy', '30s'], ['mtc', 'MTC style', '25×6s']].map(([v, l, s], i) => (
+          <label><input type="radio" name="g-time" value={v} checked={v === defTime} /><span><b>{l}</b> {s}</span></label>
+        ))}
+      </fieldset>
+    </div>
+    <p class="g-mode-note small" aria-live="polite"></p>
+    <div class="start-row">
+      <button class="g-start" type="button"><span>Start game</span> <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg></button>
+      <p class="g-best" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <div class="g-play" hidden>
+    <div class="hud">
+      <div class="ring" role="timer" aria-label="Time left">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27" class="r-bg"/><circle cx="32" cy="32" r="27" class="r-fg" pathLength="100"/></svg>
+        <b class="g-time">60</b>
+      </div>
+      <div class="screen">
+        <p class="g-q" aria-live="assertive" aria-atomic="true">&nbsp;</p>
+        <p class="g-typed" aria-hidden="true">Tap or type the answer</p>
+      </div>
+      <div class="scorebox"><span class="g-score-label">Score</span><b class="g-score">0</b><i class="plus" aria-hidden="true">+1</i></div>
+    </div>
+    <p class="g-acc" aria-live="polite"></p>
+    <div class="g-grid" role="group" aria-label="Answer buttons"></div>
+    <button type="button" class="g-stop">End round</button>
+  </div>
+
+  <div class="g-end" hidden>
+    <div class="stars" aria-hidden="true"><span set:html={ICONS.star} /><span set:html={ICONS.star} /><span set:html={ICONS.star} /></div>
+    <p class="g-end-score" aria-live="polite"></p>
+    <p class="g-end-msg"></p>
+    <div class="g-missed" hidden></div>
+    <div class="end-btns"><button class="g-start g-again" type="button"><span>Play again</span></button><button class="g-change" type="button">Change challenge</button></div>
+    <div class="confetti" aria-hidden="true"></div>
+  </div>
+</section>
+
+<style>
+.console{--accent:#6d3df5;position:relative;color:#fff;border-radius:34px;padding:1.1rem;margin:1.4rem 0 2rem;
+  background:radial-gradient(120% 90% at 0% 0%,#8b5cff 0,transparent 55%),radial-gradient(90% 90% at 100% 100%,#ff3d8b 0,transparent 55%),linear-gradient(150deg,#5b2ee8,#3a1aa8);
+  box-shadow:0 10px 0 #29107d,0 30px 70px -20px #4b21c9aa,inset 0 2px 0 #ffffff40;overflow:hidden;isolation:isolate}
+.console::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.13;background-image:radial-gradient(#fff 1.4px,transparent 1.6px);background-size:22px 22px}
+.theme-football{background:radial-gradient(120% 90% at 0% 0%,#34d399 0,transparent 55%),linear-gradient(150deg,#15803d,#0b4d2a);box-shadow:0 10px 0 #073d20,0 30px 70px -20px #15803daa,inset 0 2px 0 #ffffff40}
+.theme-football::before{opacity:.12;background-image:repeating-linear-gradient(90deg,#fff 0 60px,transparent 60px 120px);background-size:auto}
+.theme-basketball{background:radial-gradient(120% 90% at 0% 0%,#fdba74 0,transparent 55%),linear-gradient(150deg,#ea580c,#7c2d12);box-shadow:0 10px 0 #5a1f0a,0 30px 70px -20px #ea580caa,inset 0 2px 0 #ffffff40}
+@media(min-width:720px){.console{padding:1.6rem 1.8rem 1.8rem}}
+.c-top{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
+.c-top h2{margin:0;font-size:clamp(1.25rem,3vw,1.6rem);flex:1}
+.lights{display:flex;gap:6px}.lights i{width:12px;height:12px;border-radius:50%;background:#ff5f7e;box-shadow:0 0 10px #ff5f7e}.lights i:nth-child(2){background:#ffc93c;box-shadow:0 0 10px #ffc93c}.lights i:nth-child(3){background:#3ef0b5;box-shadow:0 0 10px #3ef0b5}
+.best-badge{display:inline-flex;align-items:center;gap:.35rem;background:#00000038;border:1px solid #ffffff30;padding:.35rem .8rem;border-radius:999px;font-weight:800;font-size:.9rem}
+.best-badge svg{width:18px;height:18px;color:#ffd43b}
+fieldset{border:0;padding:0;margin:0}legend{font:600 1rem var(--head);margin-bottom:.6rem;opacity:.95}
+.modes{display:grid;grid-template-columns:repeat(2,1fr);gap:.65rem}
+@media(min-width:620px){.modes{grid-template-columns:repeat(3,1fr)}}@media(min-width:980px){.modes{grid-template-columns:repeat(6,1fr)}}
+.mode input,.times input{position:absolute;opacity:0;width:1px;height:1px}
+.mode-in{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.15rem;padding:.85rem .5rem .75rem;border-radius:20px;background:#ffffff1c;border:2px solid #ffffff2e;cursor:pointer;transition:transform .2s cubic-bezier(.3,1.6,.6,1),background .2s}
+.mode-in:hover{transform:translateY(-3px);background:#ffffff2c}
+.m-ico{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:var(--c);box-shadow:0 4px 0 #0004,inset 0 2px 0 #fff5;margin-bottom:.2rem}
+.m-ico :global(svg){width:26px;height:26px}
+.m-name{font:600 1rem var(--head);line-height:1.15}.m-sub{font-size:.8rem;opacity:.85;font-weight:700}
+.mode input:checked+.mode-in{background:#fff;color:#1b1446;border-color:#fff;transform:translateY(-3px);box-shadow:0 8px 0 #0003}
+.mode input:checked+.mode-in .m-sub{color:#5b5683}
+.m-ex{font-size:.72rem;font-weight:700;margin-top:.2rem;padding:.1rem .45rem;border-radius:99px;background:#0000002e;white-space:nowrap}
+.mode input:checked+.mode-in .m-ex{background:#efeaff;color:#3b2a8f}
+.mode input:focus-visible+.mode-in,.times input:focus-visible+span{outline:3px solid #ffd43b;outline-offset:3px}
+.g-row{display:flex;flex-wrap:wrap;gap:.8rem;margin:1rem 0 .6rem;align-items:flex-end}
+.g-opt{display:flex;flex-direction:column;gap:.3rem;font-weight:700;font-size:.9rem}
+.g-opt select{appearance:none;border:2px solid #ffffff40;background:#00000030;color:#fff;border-radius:14px;padding:.55rem .9rem;font:700 1rem var(--body);min-width:10rem}
+.g-opt select option{color:#1b1446}
+.times{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+.times legend{width:100%;margin-bottom:.35rem}
+.times label span{display:inline-flex;flex-direction:column;align-items:flex-start;gap:0;padding:.45rem .7rem;border-radius:14px;background:#ffffff1c;border:2px solid #ffffff2e;cursor:pointer;font-size:.78rem;font-weight:700;line-height:1.15}
+.times label span b{font-size:.95rem}
+.times input:checked+span{background:#fff;color:#1b1446;border-color:#fff}
+.theme-switch{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin:.8rem 0 .2rem}
+.theme-switch legend{width:100%;margin-bottom:.35rem}
+.theme-switch input{position:absolute;opacity:0;width:1px;height:1px}
+.theme-switch label span{display:inline-flex;flex-direction:column;padding:.45rem .85rem;border-radius:14px;background:#ffffff1c;border:2px solid #ffffff2e;cursor:pointer;font-size:.78rem;font-weight:700}
+.theme-switch input:checked+span{background:#fff;color:#1b1446;border-color:#fff}
+.theme-switch input:focus-visible+span{outline:3px solid #ffd43b;outline-offset:3px}
+.g-mode-note{margin:.2rem 0 .6rem;opacity:.9}
+.start-row{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-top:.4rem}
+.g-start{display:inline-flex;align-items:center;gap:.5rem;border:0;cursor:pointer;background:#ffd43b;color:#1b1446;font:800 1.1rem var(--head);padding:.85rem 1.4rem;border-radius:999px;box-shadow:0 5px 0 #b97800}
+.g-start:hover{transform:translateY(-2px)}.g-start:active{transform:translateY(2px);box-shadow:0 2px 0 #b97800}
+.g-start svg{width:18px;height:18px}
+.g-best{margin:0;font-weight:700;opacity:.9}
+.hud{display:grid;grid-template-columns:auto 1fr auto;gap:.8rem;align-items:center;margin-bottom:.8rem}
+.ring{position:relative;width:74px;height:74px}.ring svg{width:100%;height:100%;transform:rotate(-90deg)}.r-bg{fill:none;stroke:#ffffff28;stroke-width:7}.r-fg{fill:none;stroke:#3ef0b5;stroke-width:7;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:0;transition:stroke-dashoffset .3s linear}.ring.low .r-fg{stroke:#ff5f7e}.ring.practice .r-fg{stroke:#ffd43b}.g-time{position:absolute;inset:0;display:grid;place-items:center;font:800 1.15rem var(--head);transform:none}
+.screen{background:#00000045;border-radius:22px;padding:1rem 1.1rem;min-height:92px;display:flex;flex-direction:column;justify-content:center;border:2px solid #ffffff22}
+.g-q{margin:0;font:800 clamp(1.6rem,5vw,2.4rem) var(--head);letter-spacing:.02em;text-align:center}.g-q.in{animation:qin .25s ease}.g-q.goal{color:#ffd43b}
+.g-typed{margin:.35rem 0 0;text-align:center;font-weight:700;opacity:.85;min-height:1.2em}
+.scorebox{background:#00000038;border-radius:18px;padding:.55rem .8rem;text-align:center;position:relative;min-width:72px}
+.scorebox span{display:block;font-size:.75rem;font-weight:800;opacity:.85}.g-score{font:800 1.6rem var(--head)}.g-score.bump{animation:bump .3s ease}.plus{position:absolute;right:-4px;top:-10px;font:800 1rem var(--head);color:#3ef0b5;opacity:0}.plus.go{animation:plus .6s ease}
+.g-acc{margin:0 0 .6rem;text-align:center;font-weight:800;opacity:.95;min-height:1.2em}
+.g-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem}@media(min-width:620px){.g-grid{grid-template-columns:repeat(6,1fr)}}
+.g-grid button{appearance:none;border:0;border-radius:18px;background:#fff;color:#1b1446;font:800 1.15rem var(--head);padding:.9rem .4rem;cursor:pointer;box-shadow:0 4px 0 #0003;transition:transform .12s}
+.g-grid button:hover{transform:translateY(-2px)}.g-grid button.ok{background:#3ef0b5}.g-grid button.no{background:#ff8aa8;animation:shake .35s}
+.g-grid button.show{background:#ffd43b}
+.g-stop,.g-change{appearance:none;border:2px solid #ffffff55;background:transparent;color:#fff;font:700 1rem var(--body);padding:.55rem 1rem;border-radius:999px;cursor:pointer;margin-top:.9rem}
+.g-end{text-align:center;padding:1rem .5rem 1.4rem}
+.stars{display:flex;justify-content:center;gap:.4rem}.stars span{width:58px;height:58px;color:#ffffff33;display:block}
+.stars span:nth-child(2){width:74px;height:74px;margin-top:-12px}
+.stars span.on{color:#ffd43b;filter:drop-shadow(0 4px 0 #b97800);animation:starpop .5s cubic-bezier(.3,1.8,.6,1) both}
+.stars span.on:nth-child(2){animation-delay:.15s}.stars span.on:nth-child(3){animation-delay:.3s}
+.g-end-score{font:800 clamp(1.5rem,4vw,2rem) var(--head);margin:.6rem 0 .2rem}
+.g-end-msg{font-weight:700;opacity:.95;max-width:36ch;margin:0 auto}
+.g-missed{margin:1rem auto 0;max-width:40ch;text-align:left;background:#00000030;border-radius:16px;padding:.8rem 1rem;border:1px solid #ffffff30}
+.g-missed h3{margin:0 0 .4rem;font-size:1rem}.g-missed ul{margin:0;padding-left:1.1rem}.g-missed li{margin:.2rem 0;font-weight:700}
+.end-btns{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:1rem}
+.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}.confetti i{position:absolute;top:-12px;width:10px;height:14px;border-radius:2px;animation:fall 1.4s ease-in forwards}
+@keyframes qin{from{transform:scale(.92);opacity:.4}to{transform:none;opacity:1}}
+@keyframes bump{0%,100%{transform:none}40%{transform:scale(1.18)}}
+@keyframes plus{0%{opacity:0;transform:translateY(6px)}30%{opacity:1}100%{opacity:0;transform:translateY(-18px)}}
+@keyframes shake{0%,100%{transform:none}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@keyframes starpop{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes fall{to{transform:translateY(110vh) rotate(480deg);opacity:0}}
+@media (prefers-reduced-motion:reduce){.confetti{display:none}}
+</style>
+
+<script>
+type Q = { text: string; say: string; answer: number; pool: number[]; fact?: string };
+const rnd = (a: number, b: number) => a + Math.floor(Math.random() * (b - a + 1));
+const range = (a: number, b: number, s = 1) => { const r: number[] = []; for (let i = a; i <= b; i += s) r.push(i); return r; };
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const MTC_COUNTS: Record<number, number> = { 2: 1, 3: 2, 4: 2, 5: 2, 6: 3, 7: 3, 8: 3, 9: 3, 10: 1, 11: 2, 12: 3 };
+
+function makeQ(mode: string, table: string, bond: string): Q {
+  if (mode === 'tables') { const n = table === 'mixed' ? rnd(2, 12) : +table, k = rnd(1, 12); return { text: `${n} × ${k}`, say: `${n} times ${k}`, answer: n * k, pool: range(1, 12).map((i) => i * n), fact: `${n} × ${k}` }; }
+  if (mode === 'division') { const n = table === 'mixed' ? rnd(2, 12) : +table, k = rnd(1, 12); return { text: `${n * k} ÷ ${n}`, say: `${n * k} divided by ${n}`, answer: k, pool: range(1, 12), fact: `${n * k} ÷ ${n}` }; }
+  if (mode === 'bonds') { const t = +bond, step = t === 100 ? 5 : 1, a = rnd(0, t / step) * step; return { text: `${a} + ? = ${t}`, say: `${a} plus what makes ${t}`, answer: t - a, pool: range(0, t, step), fact: `${a} + ${t - a}` }; }
+  if (mode === 'doubles') { const n = rnd(1, 20); return { text: `Double ${n}`, say: `Double ${n}`, answer: n * 2, pool: [], fact: `double ${n}` }; }
+  if (mode === 'halves') { const n = rnd(1, 20) * 2; return { text: `Half of ${n}`, say: `Half of ${n}`, answer: n / 2, pool: [], fact: `half of ${n}` }; }
+  const n = rnd(1, 12); return { text: `${n}²`, say: `${n} squared`, answer: n * n, pool: range(1, 12).map((i) => i * i), fact: `${n}²` };
+}
+function makeMtcDeck(): Q[] {
+  const deck: Q[] = [];
+  for (const [nStr, count] of Object.entries(MTC_COUNTS)) {
+    const n = +nStr;
+    for (let i = 0; i < count; i++) {
+      const k = rnd(1, 12);
+      const flip = Math.random() < 0.5;
+      const a = flip ? k : n, b = flip ? n : k;
+      deck.push({ text: `${a} × ${b}`, say: `${a} times ${b}`, answer: a * b, pool: [], fact: `${a} × ${b}` });
+    }
+  }
+  for (let i = deck.length - 1; i > 0; i--) { const j = rnd(0, i); [deck[i], deck[j]] = [deck[j], deck[i]]; }
+  return deck;
+}
+function optionsFor(q: Q, mode: string): number[] {
+  if (q.pool.length) return q.pool;
+  const step = mode === 'doubles' ? 2 : 1, max = mode === 'doubles' ? 40 : 20, set = new Set<number>([q.answer]);
+  while (set.size < 12) set.add(rnd(1, max / step) * step);
+  return [...set].sort((a, b) => a - b);
+}
+
+document.querySelectorAll<HTMLElement>('.console').forEach((root) => {
+  const $ = <T extends Element = HTMLElement>(s: string) => root.querySelector(s) as T;
+  const setup = $('.g-setup'), play = $('.g-play'), end = $('.g-end'), grid = $('.g-grid'), qEl = $('.g-q'), typedEl = $('.g-typed');
+  const timeEl = $('.g-time'), scoreEl = $('.g-score'), bestEl = $('.g-best'), bestNum = $('.g-bestnum'), ring = $('.ring'), fg = $<SVGCircleElement>('.r-fg'), plus = $('.plus');
+  const tableSel = $<HTMLSelectElement>('[name=g-table]'), bondSel = $<HTMLSelectElement>('[name=g-bond]');
+  const note = $('.g-mode-note'), accEl = $('.g-acc'), missedBox = $('.g-missed'), scoreLabel = $('.g-score-label');
+  const roundVal = () => (root.querySelector('[name=g-time]:checked') as HTMLInputElement).value;
+  const themeOf = () => (root.classList.contains('theme-basketball') ? 'basketball' : root.classList.contains('theme-football') ? 'football' : (root.dataset.theme || 'classic'));
+  const isTheme = () => themeOf() !== 'classic';
+  root.querySelectorAll<HTMLInputElement>('[name=g-theme]').forEach((r) => r.addEventListener('change', () => {
+    root.classList.remove('theme-football', 'theme-basketball', 'theme-classic');
+    root.classList.add('theme-' + r.value);
+    root.dataset.theme = r.value;
+  }));
+  let mode = root.dataset.mode || 'tables', q: Q, score = 0, wrong = 0, total = 60, left = 60, timer = 0, typed = '', running = false, lastText = '';
+  let round = '60', mtcDeck: Q[] = [], mtcIdx = 0, missed: string[] = [], locked = false, pauseTimer = 0;
+
+  const key = () => `htbm:${mode}:${mode === 'bonds' ? bondSel.value : (mode === 'tables' || mode === 'division') ? tableSel.value : '-'}:${roundVal()}`;
+  const best = () => { try { return +(localStorage.getItem(key()) || 0); } catch { return 0; } };
+  const showBest = () => {
+    const r = roundVal();
+    note.textContent = r === 'practice' ? 'Practice: no timer. After a wrong answer we show the correct one, then move on. Accuracy updates as you go.'
+      : r === 'mtc' ? 'MTC style: 25 mixed multiplication questions (tables 2–12, weighted like the STA framework). 6 seconds each, then a 3-second pause. Typing works best. Not the official check.'
+      : '';
+    if (r === 'practice') { bestNum.textContent = '–'; bestEl.textContent = 'Practice has no personal best — just accuracy.'; return; }
+    const b = best(); bestNum.textContent = String(b); bestEl.textContent = b ? `Your best here: ${b}. Can you beat it?` : 'No best score yet. Have a go!';
+  };
+  const syncOpts = () => {
+    root.querySelectorAll<HTMLElement>('.g-opt').forEach((el) => { el.hidden = !(el.dataset.for || '').split(' ').includes(mode); });
+    const r = roundVal();
+    const hideSkill = r === 'mtc';
+    root.querySelectorAll<HTMLElement>('.modes, .g-opt').forEach((el) => { if (el.classList.contains('modes') || el.classList.contains('g-opt')) el.style.opacity = hideSkill && !el.classList.contains('times') ? '0.45' : ''; });
+    if (r === 'mtc') mode = 'tables';
+    showBest();
+  };
+  root.querySelectorAll<HTMLInputElement>('[name=g-mode]').forEach((r) => r.addEventListener('change', () => { mode = r.value; if (roundVal() === 'mtc') { (root.querySelector('[name=g-time][value="60"]') as HTMLInputElement).checked = true; } syncOpts(); }));
+  root.querySelectorAll('select,[name=g-time]').forEach((s) => s.addEventListener('change', () => { if (roundVal() === 'mtc') { const t = root.querySelector('[name=g-mode][value="tables"]') as HTMLInputElement; if (t) { t.checked = true; mode = 'tables'; } } syncOpts(); }));
+  syncOpts();
+  document.querySelectorAll<HTMLElement>('[data-practise]').forEach((b) => b.addEventListener('click', () => {
+    const [m, opt] = (b.dataset.practise || '').split(':');
+    const r = root.querySelector(`[name=g-mode][value="${m}"]`) as HTMLInputElement; if (r) { r.checked = true; mode = m; }
+    if (opt) tableSel.value = opt;
+    const timed = root.querySelector('[name=g-time][value="60"]') as HTMLInputElement; if (timed) timed.checked = true;
+    if (running) finish(true);
+    end.hidden = true; play.hidden = true; setup.hidden = false; syncOpts();
+    root.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    ($('.g-setup .g-start') as HTMLElement).focus({ preventScroll: true });
+  }));
+
+  function updateAcc() {
+    const t = score + wrong;
+    accEl.textContent = t ? `Accuracy ${Math.round((score / t) * 100)}% (${score} right, ${wrong} wrong)` : '';
+  }
+  function next() {
+    locked = false;
+    if (round === 'mtc') {
+      if (mtcIdx >= mtcDeck.length) { finish(); return; }
+      q = mtcDeck[mtcIdx++];
+      timeEl.textContent = String(mtcIdx) + '/25';
+      scoreLabel.textContent = 'Q';
+      scoreEl.textContent = String(mtcIdx);
+    } else {
+      do { q = makeQ(mode, tableSel.value, bondSel.value); } while (q.text === lastText);
+    }
+    lastText = q.text; qEl.textContent = q.text; qEl.setAttribute('aria-label', q.say);
+    qEl.classList.remove('goal', 'in'); void qEl.offsetWidth; qEl.classList.add('in');
+    typed = ''; typedEl.textContent = round === 'mtc' ? 'Type the answer and press Enter' : 'Tap or type the answer';
+    grid.innerHTML = '';
+    if (round !== 'mtc') {
+      for (const v of optionsFor(q, mode)) {
+        const b = document.createElement('button'); b.type = 'button'; b.textContent = String(v); b.dataset.v = String(v);
+        b.addEventListener('click', () => answer(v, b)); grid.appendChild(b);
+      }
+      (grid.querySelector('button') as HTMLElement)?.focus({ preventScroll: true });
+    }
+    if (round === 'mtc') {
+      left = 6; total = 6; tick();
+      clearInterval(timer);
+      timer = window.setInterval(() => { left--; tick(); if (left <= 0) timeoutMtc(); }, 1000);
+    }
+  }
+  function timeoutMtc() {
+    if (!running || locked) return;
+    locked = true; wrong++; missed.push(q.fact || q.text);
+    typedEl.textContent = `Time's up — answer was ${q.answer}`;
+    updateAcc();
+    clearInterval(timer);
+    pauseThenNext();
+  }
+  function pauseThenNext() {
+    clearTimeout(pauseTimer);
+    pauseTimer = window.setTimeout(() => { if (running) next(); }, 3000);
+  }
+  function answer(v: number, btn?: HTMLElement | null) {
+    if (!running || locked) return;
+    btn = btn || grid.querySelector<HTMLElement>(`[data-v="${v}"]`);
+    if (v === q.answer) {
+      locked = true; score++; if (round !== 'mtc') scoreEl.textContent = String(score);
+      btn?.classList.add('ok');
+      scoreEl.classList.remove('bump'); plus.classList.remove('go'); void scoreEl.offsetWidth; scoreEl.classList.add('bump'); plus.classList.add('go');
+      if (isTheme()) qEl.classList.add('goal');
+      updateAcc();
+      if (round === 'mtc') { clearInterval(timer); pauseThenNext(); }
+      else if (round === 'practice') setTimeout(() => { if (running) next(); }, 400);
+      else setTimeout(() => { if (running) next(); }, isTheme() ? 260 : 150);
+    } else {
+      wrong++;
+      if (btn) { btn.classList.remove('no'); void btn.offsetWidth; btn.classList.add('no'); setTimeout(() => btn?.classList.remove('no'), 350); }
+      if (round === 'practice') {
+        locked = true;
+        typedEl.textContent = `Not quite — the answer is ${q.answer}`;
+        const right = grid.querySelector<HTMLElement>(`[data-v="${q.answer}"]`);
+        right?.classList.add('show');
+        updateAcc();
+        setTimeout(() => { if (running) next(); }, 1200);
+      } else if (round === 'mtc') {
+        locked = true; missed.push(q.fact || q.text);
+        typedEl.textContent = `Not quite — the answer is ${q.answer}`;
+        updateAcc(); clearInterval(timer); pauseThenNext();
+      } else {
+        typedEl.textContent = 'Not quite, try again';
+        updateAcc();
+      }
+    }
+  }
+  const tick = () => {
+    if (round === 'practice') { timeEl.textContent = '∞'; fg.style.strokeDashoffset = '0'; ring.classList.add('practice'); ring.classList.remove('low'); return; }
+    ring.classList.remove('practice');
+    if (round === 'mtc') { timeEl.textContent = String(left); fg.style.strokeDashoffset = String(100 - (left / 6) * 100); ring.classList.toggle('low', left <= 2); return; }
+    timeEl.textContent = String(left); fg.style.strokeDashoffset = String(100 - (left / total) * 100); ring.classList.toggle('low', left <= 5);
+  };
+  function start() {
+    clearInterval(timer); clearTimeout(pauseTimer);
+    round = roundVal(); score = 0; wrong = 0; missed = []; mtcIdx = 0; locked = false; typed = '';
+    scoreLabel.textContent = round === 'mtc' ? 'Q' : 'Score';
+    if (round === 'mtc') { mtcDeck = makeMtcDeck(); mode = 'tables'; scoreEl.textContent = '1'; }
+    else { scoreEl.textContent = '0'; total = left = round === 'practice' ? 0 : +round; }
+    tick(); updateAcc();
+    setup.hidden = true; end.hidden = true; play.hidden = false; missedBox.hidden = true; running = true; next();
+    root.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    if (round !== 'practice' && round !== 'mtc') {
+      clearInterval(timer); timer = window.setInterval(() => { left--; tick(); if (left <= 0) finish(); }, 1000);
+    }
+  }
+  function confetti() {
+    if (reduce) return; const box = $('.confetti'); box.innerHTML = '';
+    const cols = ['#ffd43b', '#ff3d8b', '#3ef0b5', '#7cc4ff', '#fff', '#ff9f43'];
+    for (let i = 0; i < 70; i++) { const c = document.createElement('i'); c.style.left = Math.random() * 100 + '%'; c.style.background = cols[i % cols.length]; c.style.animationDelay = Math.random() * .5 + 's'; c.style.transform = `rotate(${Math.random() * 360}deg)`; box.appendChild(c); }
+  }
+  function finish(skipUi = false) {
+    running = false; locked = true; clearInterval(timer); clearTimeout(pauseTimer);
+    if (skipUi) return;
+    play.hidden = true; end.hidden = false;
+    const acc = score + wrong ? Math.round((score / (score + wrong)) * 100) : 0;
+    if (round === 'practice') {
+      root.querySelectorAll('.stars span').forEach((s, i) => s.classList.toggle('on', i < (acc >= 95 ? 3 : acc >= 80 ? 2 : 1)));
+      $('.g-end-score').textContent = `${score} correct`;
+      $('.g-end-msg').textContent = `Practice round over. Accuracy ${acc}% (${score} right, ${wrong} wrong). No personal best is saved in Practice.`;
+      missedBox.hidden = true;
+    } else if (round === 'mtc') {
+      const answered = score + wrong;
+      const stars = score >= 23 ? 3 : score >= 18 ? 2 : score >= 1 ? 1 : 0;
+      root.querySelectorAll('.stars span').forEach((s, i) => s.classList.toggle('on', i < stars));
+      $('.g-end-score').textContent = `${score} / 25`;
+      $('.g-end-msg').textContent = `MTC-style check finished. Accuracy ${acc}%. This is practice only — not the official Multiplication Tables Check.`;
+      if (missed.length) {
+        missedBox.hidden = false;
+        missedBox.innerHTML = `<h3>Facts to revisit</h3><ul>${[...new Set(missed)].map((f) => `<li>${f}</li>`).join('')}</ul>`;
+      } else { missedBox.hidden = false; missedBox.innerHTML = '<h3>Facts to revisit</h3><p>None missed — well done.</p>'; }
+      const prev = best(), isBest = score > prev;
+      if (isBest && score > 0) { try { localStorage.setItem(key(), String(score)); } catch {} confetti(); }
+    } else {
+      const prev = best(), isBest = score > prev && score > 0;
+      if (isBest) { try { localStorage.setItem(key(), String(score)); } catch {} }
+      const stars = score === 0 ? 0 : acc >= 95 ? 3 : acc >= 80 ? 2 : 1;
+      root.querySelectorAll('.stars span').forEach((s, i) => s.classList.toggle('on', i < stars));
+      $('.g-end-score').textContent = `You scored ${score}!`;
+      $('.g-end-msg').textContent = isBest ? `New personal best! Accuracy ${acc}%.`
+        : `Your best is ${prev}. Accuracy ${acc}%. ${acc < 80 ? 'Try slowing down a little: accuracy first, speed second.' : 'Lovely accuracy, now see if you can go a bit faster.'}`;
+      if (isBest) confetti();
+      missedBox.hidden = true;
+    }
+    showBest(); $('.g-again').focus();
+  }
+  root.querySelectorAll('.g-start').forEach((b) => b.addEventListener('click', start));
+  $('.g-change').addEventListener('click', () => { end.hidden = true; setup.hidden = false; showBest(); });
+  $('.g-stop').addEventListener('click', () => finish());
+  document.addEventListener('keydown', (e) => {
+    if (!running || locked) return;
+    if (/^[0-9]$/.test(e.key)) { typed = (typed + e.key).slice(0, 4); typedEl.textContent = `Your answer: ${typed}`; e.preventDefault(); }
+    else if (e.key === 'Backspace') { typed = typed.slice(0, -1); typedEl.textContent = typed ? `Your answer: ${typed}` : ' '; e.preventDefault(); }
+    else if (e.key === 'Enter' && typed) { e.preventDefault(); const v = +typed; typed = ''; answer(v); }
+    else if (e.key === 'Escape') finish();
+  });
+});
+</script>

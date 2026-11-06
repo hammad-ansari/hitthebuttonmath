@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../site';
+---
+<Base title="Contact Hit the Button Math" description="Get in touch with Hit the Button Math with feedback, bug reports, ideas for new games or questions about the site." crumbs={[{ name: 'Contact', path: '/contact/' }]}>
+  <div class="wrap prose">
+    <h1><span class="grad-text">Contact us</span></h1>
+    <div class="answer"><p>Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. We read every message, though replies can take a few days.</p></div>
+    <h2>Helpful things to include</h2>
+    <ul>
+      <li>Which page or game mode you were using</li>
+      <li>Your device and browser (for example iPad Safari, Chromebook Chrome)</li>
+      <li>What you expected to happen, and what happened instead</li>
+    </ul>
+  </div>
+</Base>

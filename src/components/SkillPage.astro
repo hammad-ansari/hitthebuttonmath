@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import Game from './Game.astro';
+import Faq from './Faq.astro';
+import Related from './Related.astro';
+import Author from './Author.astro';
+import { appSchema, faqSchema, type QA } from '../lib';
+import { SITE } from '../site';
+interface Props { title: string; description: string; h1: string; answer: string; path: string; crumb: string; mode: string; option?: string; theme?: 'classic'|'football'|'basketball'; themeSwitch?: boolean; faq: QA[]; gameHeading?: string }
+const p = Astro.props;
+---
+<Base title={p.title} description={p.description} crumbs={[{ name: p.crumb, path: p.path }]} schema={[appSchema(p.h1, p.path, p.description), ...(p.faq.length ? [faqSchema(p.faq)] : [])]}>
+  <div class="hero-band"><div class="wrap">
+    <span class="eyebrow">★ Free · No sign-up · Any device</span>
+    <h1><span class="grad-text">{p.h1}</span></h1>
+    <div class="answer"><p set:html={p.answer} /></div>
+  </div></div>
+  <div class="wrap">
+    <Game mode={p.mode} option={p.option} theme={p.theme} themeSwitch={p.themeSwitch} heading={p.gameHeading} />
+    <p class="game-disclaimer">This is an independent Hit the Button <em>style</em> game. It is not affiliated with Topmarks. <a href="/disclaimer/">Disclaimer</a>.</p>
+    <div class="prose"><slot /></div>
+    <Author updated={SITE.updated} />
+    {p.faq.length > 0 && <Faq items={p.faq} />}
+    <Related exclude={p.path} />
+  </div>
+</Base>

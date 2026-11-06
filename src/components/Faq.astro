@@ -1,0 +1,5 @@
+---
+import type { QA } from '../lib';
+const { items, title = 'Frequently asked questions' } = Astro.props as { items: QA[]; title?: string };
+---
+<section class="faq"><h2>{title}</h2>{items.map((i, n) => <details open={n === 0}><summary>{i.q}</summary><p>{i.a}</p></details>)}</section>

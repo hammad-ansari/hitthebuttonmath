@@ -1,0 +1,19 @@
+---
+import { AUTHOR, SITE } from '../site';
+interface Props { date?: string; updated?: string; full?: boolean }
+const { date, updated = SITE.updated, full = false } = Astro.props;
+const pub = date || updated;
+const fmt = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+{full ? (
+<aside class="author-box" aria-labelledby="author-h">
+  <div class="author-av" aria-hidden="true">DC</div>
+  <div>
+    <p id="author-h" class="author-name"><a href={AUTHOR.url}>{AUTHOR.name}</a> <span class="author-role">· {AUTHOR.jobTitle}</span></p>
+    <p class="author-meta"><time datetime={pub}>Published {fmt(pub)}</time>{updated && updated !== pub && <> · Updated <time datetime={updated}>{fmt(updated)}</time></>} · <a href="/about/#how-we-check">How we check</a></p>
+    <p class="author-bio">{AUTHOR.bio}</p>
+  </div>
+</aside>
+) : (
+<p class="byline">By <a href={AUTHOR.url}>{AUTHOR.name}</a> · Updated <time datetime={updated}>{fmt(updated)}</time></p>
+)}

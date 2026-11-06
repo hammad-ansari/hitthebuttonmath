@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hitthebuttonmath.com/sitemap-index.xml

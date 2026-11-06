@@ -1,0 +1,5 @@
+---
+import { SRC, type SrcKey } from '../sources';
+const { keys } = Astro.props as { keys: SrcKey[] };
+---
+<aside class="sources" aria-labelledby="src-h"><h2 id="src-h">Sources</h2><ul>{keys.map((k) => <li><a href={SRC[k].u} rel="noopener" target="_blank">{SRC[k].t}</a></li>)}</ul><p class="small">Curriculum details refer to England. Scotland, Wales and Northern Ireland follow their own curricula.</p></aside>

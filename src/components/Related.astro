@@ -1,0 +1,16 @@
+---
+import { ICONS } from '../icons';
+const all = [
+  { p: '/times-tables/', t: 'Tables practice', d: 'Every table from 2 to 12, or mix them up.', i: 'tables', c: 'c1' },
+  { p: '/number-bonds/', t: 'Bond pairs', d: 'Pairs that make 10, 20 and 100.', i: 'bonds', c: 'c2' },
+  { p: '/doubles/', t: 'Doubles and halves', d: 'Double to 20 and halve to 40 at speed.', i: 'doubles', c: 'c3' },
+  { p: '/doubles/#halves', t: 'Halves', d: 'Halve even numbers up to 40.', i: 'halves', c: 'c4' },
+  { p: '/times-tables/#division', t: 'Division facts', d: 'The inverse of your times tables.', i: 'division', c: 'c5' },
+  { p: '/times-tables/#square-numbers', t: 'Square numbers', d: 'From 1² up to 12².', i: 'squares', c: 'c6' },
+  { p: '/sports/', t: 'Sport themes', d: 'Sport themes — goals or baskets for every right answer.', i: 'football', c: 'c7' },
+  { p: '/#how-to-play', t: 'How to play', d: 'Rules, controls and tips.', i: 'book', c: 'c9' },
+  { p: '/teachers/', t: 'Classroom ideas', d: 'Using it in class and as a starter.', i: 'teach', c: 'c10' },
+];
+const { exclude = '', title = 'Keep practising' } = Astro.props;
+---
+<section><h2>{title}</h2><div class="grid">{all.filter((x) => x.p !== exclude).slice(0, 8).map((x) => <a class={`card ${x.c}`} href={x.p}><span class="ico" set:html={ICONS[x.i]} /><h3>{x.t}</h3><p>{x.d}</p><span class="go" aria-hidden="true">→</span></a>)}</div></section>

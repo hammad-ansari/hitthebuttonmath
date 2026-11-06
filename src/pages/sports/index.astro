@@ -1,0 +1,39 @@
+---
+import SkillPage from '../../components/SkillPage.astro';
+import Sources from '../../components/Sources.astro';
+import { SRC } from '../../sources';
+const faq = [
+  { q: 'What are the sport maths games?', a: 'The same quick-fire maths game with a football or basketball look. Switch theme above the Start button. Correct answers count as goals or baskets.' },
+  { q: 'Football or basketball — which should we use?', a: 'Same maths either way. Pick football for match tallies and warm-up drills; basketball if you want to emphasise accuracy (shooting percentage) and square-number “three-pointers”.' },
+  { q: 'Which skills suit which year?', a: 'Reception–Year 1: bonds to 10 and small doubles. Year 2: 2, 5 and 10 tables. Year 3: 3, 4 and 8. Year 4: Mixed tables or MTC style, with extra practice on 6, 7, 8, 9 and 12.' },
+  { q: 'Is it free?', a: 'Yes. Free in the browser, no download or sign-up.' },
+];
+---
+<SkillPage title="Football & Basketball Maths Games – Hit the Button Sport Themes"
+  description="Free football and basketball themed Hit the Button maths games. Switch theme, practise times tables and bonds, and keep accuracy high on any device."
+  h1="Football and basketball maths" path="/sports/" crumb="Sports" mode="tables" option="mixed" theme="football" themeSwitch={true}
+  answer="<strong>Same maths, sport skin.</strong> Switch between football (goals) and basketball (baskets), pick a skill, then chase your own best — not a sibling rivalry meltdown."
+  gameHeading="Pick a sport and play" faq={faq}>
+
+  <h2>Why a theme helps</h2>
+  <p>Some children switch off when practice sounds like a test. A goal tally or a basket count reframes the same facts. The questions match the <a href="/">classic game</a>; only the colours and the cheer change.</p>
+
+  <h2 id="football">Football: match-day drills</h2>
+  <p>Think like a training session: warm-up on an easy table (2s or 10s), drill this week's school table for two short rounds, then one Mixed or <strong>MTC style</strong> “match” for the goal tally. House ideas: a five-round penalty shoot-out (only count rounds at 90%+ accuracy), or parent vs child with the adult starting five goals down.</p>
+
+  <h2 id="basketball">Basketball: accuracy first</h2>
+  <p>Coaches care about shooting percentage. So do we — watch the accuracy figure at the end. Free throws: Practice or 90 seconds on one table until answers are clean. Around the world: one round each of <a href="/number-bonds/">bonds</a>, <a href="/doubles/">doubles</a>, halves and <a href="/times-tables/#square-numbers">squares</a>. Three-pointers: square numbers for Year 5+.</p>
+
+  <h2>Year-group quick guide</h2>
+  <ul>
+    <li><strong>Reception–Year 1:</strong> bonds to 10, small doubles.</li>
+    <li><strong>Year 2:</strong> 2, 5 and 10 tables.</li>
+    <li><strong>Year 3:</strong> 3, 4 and 8 (doubling links 2→4→8).</li>
+    <li><strong>Year 4:</strong> all tables to 12 × 12; Mixed + MTC style. Weight practice toward 6, 7, 8, 9 and 12 (<a href={SRC.mtcParents.u} rel="noopener" target="_blank">STA parent guidance</a>).</li>
+  </ul>
+  <p class="small">Year groups follow the <a href={SRC.nc.u} rel="noopener" target="_blank">national curriculum in England</a>.</p>
+
+  <h2>When competition turns sour</h2>
+  <p>Switch to Practice mode (no timer), hide league charts for a week, and praise accuracy. The Education Endowment Foundation's <a href={SRC.eef.u} rel="noopener" target="_blank">maths guidance</a> notes that maths anxiety can overload working memory — a frozen child may blank on facts they know.</p>
+  <Sources keys={['nc','eef','mtcParents']} />
+</SkillPage>

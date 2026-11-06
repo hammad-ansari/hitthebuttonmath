@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import { AUTHOR, SITE } from '../../site';
+import { personSchema, organizationSchema } from '../../lib';
+import Author from '../../components/Author.astro';
+---
+<Base title="About Hit the Button Math" description="Who runs this free primary maths site, how we research the guides, and how we stay independent of Topmarks." crumbs={[{ name: 'About', path: '/about/' }]} schema={[organizationSchema(), personSchema()]}>
+  <div class="wrap prose">
+    <h1><span class="grad-text">About Hit the Button Math</span></h1>
+    <div class="answer"><p><strong>This is a free, independent website with quick-fire maths games for primary children.</strong> We built it to be fast, simple and safe to use at home or in class.</p></div>
+
+    <Author full />
+    <h2 id="daniel-carter">Who runs this site</h2>
+    <p><strong>{AUTHOR.name}</strong> builds and maintains the site. He writes and updates the guides, links them to official sources, and tests the game in the browser before each release. He is not a classroom teacher, and he does not claim teaching qualifications.</p>
+    <p>Contact: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+
+    <h2 id="how-we-check">How we write and check guides</h2>
+    <ul>
+      <li>Curriculum and MTC facts are checked against the DfE national curriculum and ready-to-progress guidance, STA Multiplication Tables Check documents, NCETM Mastering Number pages and Education Endowment Foundation maths guidance. We link to those sources on the page.</li>
+      <li>We do not invent statistics, pass marks or quotes. When official dates change (for example the June MTC window), we update the page.</li>
+      <li>The game is tested in a desktop browser for scoring, Practice mode, MTC-style timing, keyboard entry and mobile layout before we publish.</li>
+      <li>Curriculum details are for England. Scotland, Wales and Northern Ireland have their own curricula, though the maths facts are the same.</li>
+    </ul>
+
+    <h2>What we believe</h2>
+    <ul>
+      <li><strong>Short and often wins.</strong> A few minutes of daily practice builds recall better than long sessions.</li>
+      <li><strong>No barriers.</strong> No accounts, no downloads, no personal data from children.</li>
+      <li><strong>Accuracy matters.</strong> Results show accuracy as well as score, and Practice mode shows the correct answer after a miss.</li>
+    </ul>
+
+    <h2>Independent</h2>
+    <p>This site is not connected to Topmarks or to the creators of any other quick-fire maths game that uses a similar name. The game, design and writing here are our own. See the <a href="/disclaimer/">disclaimer</a>.</p>
+    <p>Suggestions are welcome on our <a href="/contact/">contact page</a>.</p>
+  </div>
+</Base>

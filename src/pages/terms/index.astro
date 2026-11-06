@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../site';
+---
+<Base title="Terms of Use – Hit the Button Math" description="Terms for using this free primary maths practice site: personal and classroom use, intellectual property, children, ads, liability and how to contact us." crumbs={[{ name: 'Terms of use', path: '/terms/' }]}>
+  <div class="wrap prose">
+    <h1><span class="grad-text">Terms of use</span></h1>
+    <p class="meta">Last updated <time datetime={SITE.updated}>{new Date(SITE.updated + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</time></p>
+
+    <p>These terms explain how you may use this website. By using the site you agree to them. If you do not agree, please do not use it.</p>
+
+    <h2>Acceptance of terms</h2>
+    <p>Using the games, guides or printables means you accept these terms and our <a href="/privacy/">privacy policy</a>. We may update the terms from time to time; the date above shows when they last changed. Continued use after a change means you accept the updated terms.</p>
+
+    <h2>Free educational use</h2>
+    <p>The site is free for personal learning at home and for classroom use by teachers and schools. You may play in a browser, share links with pupils or families, and print or download our teachers’ printables PDF for educational use.</p>
+    <p>You may not sell access to the site, rehost our pages or game files elsewhere, scrape the content to build a competing product, or sell our materials as a commercial pack. Ordinary classroom copies of the printables for your own pupils are fine.</p>
+
+    <h2>Intellectual property</h2>
+    <p>The game code, layout, text and original graphics on this site are owned by us unless we say otherwise. Please do not copy them wholesale without permission.</p>
+    <p>Other people’s trademarks stay theirs. Topmarks and any associated Hit the Button marks belong to their owners. This site is independent and is not affiliated with, endorsed by or connected to Topmarks. See our <a href="/disclaimer/">disclaimer</a>.</p>
+
+    <h2>Children and supervision</h2>
+    <p>The games are aimed at primary-age children. An adult should decide whether the site is suitable and supervise younger children online as usual. We do not ask children to create accounts. Data practices are explained in the <a href="/privacy/">privacy policy</a>.</p>
+
+    <h2>Advertising and third-party links</h2>
+    <p>We may show advertising (for example Google AdSense) once a publisher account is configured. Ads are kept away from the game area where possible. Links to other websites are for information only; we are not responsible for their content or privacy practices.</p>
+
+    <h2>No warranty</h2>
+    <p>The site is provided “as is”. We aim to keep scoring, timing and guides accurate, but we do not promise uninterrupted access, error-free software, or any particular test result (including the Year 4 Multiplication Tables Check). Official assessments are set by schools and awarding bodies, not by us.</p>
+
+    <h2>Limitation of liability</h2>
+    <p>To the extent allowed by law, we are not liable for indirect or consequential loss from using the site, including lost marks or device problems. Nothing here excludes liability that cannot be excluded under applicable law (for example death or personal injury caused by negligence, or fraud).</p>
+
+    <h2>Changes to the site</h2>
+    <p>We may add, change or remove features at any time, or suspend the site for maintenance.</p>
+
+    <h2>Governing law</h2>
+    <p>These terms are governed by the laws of England and Wales, in line with the UK privacy rights described on our privacy page. Courts in England and Wales have non-exclusive jurisdiction.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about these terms: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. You can also use our <a href="/contact/">contact page</a>.</p>
+  </div>
+</Base>

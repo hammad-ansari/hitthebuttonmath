@@ -1,0 +1,5 @@
+# Placeholder ads.txt for Hit the Button Math.
+# When Google AdSense is approved, replace the line below with your real publisher ID, for example:
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+# Until then this file intentionally lists no authorised sellers.
+# Contact: info@hitthebuttonmath.com

@@ -1,0 +1,94 @@
+---
+import '@fontsource-variable/fredoka/wght.css';
+import '@fontsource-variable/nunito/wght.css';
+import '../styles/global.css';
+import { SITE, NAV } from '../site';
+interface Crumb { name: string; path: string }
+interface Props { title: string; description: string; crumbs?: Crumb[]; schema?: object[]; ogType?: string }
+const { title, description, crumbs = [], schema = [], ogType = 'website' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, SITE.url).href;
+const ogImage = new URL('/og-image.png', SITE.url).href;
+const ld: object[] = [...schema];
+if (crumbs.length) {
+  ld.push({
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [{ name: 'Home', path: '/' }, ...crumbs].map((c, i) => ({
+      '@type': 'ListItem', position: i + 1, name: c.name, item: new URL(c.path, SITE.url).href,
+    })),
+  });
+}
+const here = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#4f46e5" />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:site_name" content={SITE.name} />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  {ld.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+  {SITE.adsenseId && (
+    <>
+      <script is:inline set:html={`window.adsbygoogle=window.adsbygoogle||[];` + (SITE.adsenseNonPersonalized ? `window.adsbygoogle.requestNonPersonalizedAds=1;` : '') + `window.__htbmAds={childDirected:` + String(!!SITE.adsenseChildDirected) + `,nonPersonalized:` + String(!!SITE.adsenseNonPersonalized) + `};`} />
+      <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${SITE.adsenseId}`} crossorigin="anonymous"></script>
+    </>
+  )}
+  {SITE.analyticsDomain && <script defer data-domain={SITE.analyticsDomain} src="https://plausible.io/js/script.js"></script>}
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="logo" href="/" aria-label={`${SITE.name} home`}><svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c4dff"/><stop offset="1" stop-color="#ff3d8b"/></linearGradient></defs><rect x="2" y="4" width="36" height="34" rx="12" fill="#321196"/><rect x="2" y="1" width="36" height="33" rx="12" fill="url(#lg)"/><path d="M13 11l14 14M27 11L13 25" stroke="#fff" stroke-width="4.2" stroke-linecap="round"/></svg> Hit the Button <b>Math</b></a>
+      <button type="button" class="menu-btn" aria-expanded="false" aria-controls="main-nav">Menu</button>
+      <nav id="main-nav" class="main-nav" aria-label="Main">
+        <ul>{NAV.map((n) => <li><a href={n.path} aria-current={here.startsWith(n.path) ? 'page' : undefined}>{n.name}</a></li>)}</ul>
+      </nav>
+      <script is:inline>document.querySelector('.menu-btn').addEventListener('click',function(){var o=this.getAttribute('aria-expanded')==='true';this.setAttribute('aria-expanded',String(!o));document.getElementById('main-nav').classList.toggle('open',!o);});</script>
+    </div>
+  </header>
+  {crumbs.length > 0 && (
+    <nav class="wrap crumbs" aria-label="Breadcrumb">
+      <ol><li><a href="/">Home</a></li>{crumbs.map((c, i) => <li>{i === crumbs.length - 1 ? <span aria-current="page">{c.name}</span> : <a href={c.path}>{c.name}</a>}</li>)}</ol>
+    </nav>
+  )}
+  <main id="main"><slot /></main>
+  <footer class="site-footer">
+    <div class="wrap"><p class="disclaimer-banner">Independent site — not affiliated with, endorsed by or connected to Topmarks or its Hit the Button game. <a href="/disclaimer/">Read the independence notice</a>.</p></div>
+    <div class="wrap foot">
+      <div>
+        <p class="logo"><svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7c4dff"/><stop offset="1" stop-color="#ff3d8b"/></linearGradient></defs><rect x="2" y="4" width="36" height="34" rx="12" fill="#321196"/><rect x="2" y="1" width="36" height="33" rx="12" fill="url(#lg2)"/><path d="M13 11l14 14M27 11L13 25" stroke="#fff" stroke-width="4.2" stroke-linecap="round"/></svg> Hit the Button <b>Math</b></p>
+        <p class="small">Free, quick-fire maths practice for primary school children. No sign-up, no downloads.</p>
+        <p class="small">An independent site. Not affiliated with or endorsed by Topmarks. See our <a href="/disclaimer/">disclaimer</a>.</p>
+      </div>
+      <div>
+        <p class="foot-h">Practise</p>
+        <ul><li><a href="/times-tables/">Tables 2–12 practice</a></li><li><a href="/number-bonds/">Bonds to 10, 20 &amp; 100</a></li><li><a href="/doubles/">Doubling game</a></li><li><a href="/doubles/#halves">Halving practice</a></li><li><a href="/times-tables/#division">Division practice</a></li><li><a href="/times-tables/#square-numbers">Square numbers practice</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-h">Sport themes</p>
+        <ul><li><a href="/sports/">Sport-themed maths rounds</a></li></ul>
+        <p class="foot-h">Guides</p>
+        <ul><li><a href="/#how-to-play">How a round works</a></li><li><a href="/teachers/">Classroom starters</a></li><li><a href="/blog/">Parent &amp; teacher guides</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-h">Site</p>
+        <ul><li><a href="/about/">Who runs this site</a></li><li><a href="/contact/">Get in touch</a></li><li><a href="/privacy/">Privacy policy</a></li><li><a href="/terms/">Terms of use</a></li><li><a href="/disclaimer/">Independence notice</a></li></ul>
+      </div>
+    </div>
+    <p class="wrap small copy">© {new Date().getFullYear()} {SITE.name}</p>
+  </footer>
+</body>
+</html>
