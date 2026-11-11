@@ -2,7 +2,7 @@
 import '@fontsource-variable/fredoka/wght.css';
 import '@fontsource-variable/nunito/wght.css';
 import '../styles/global.css';
-import { SITE, NAV } from '../site';
+import { SITE, NAV, SOCIALS } from '../site';
 interface Crumb { name: string; path: string }
 interface Props { title: string; description: string; crumbs?: Crumb[]; schema?: object[]; ogType?: string }
 const { title, description, crumbs = [], schema = [], ogType = 'website' } = Astro.props;
@@ -94,6 +94,11 @@ const here = Astro.url.pathname;
         <ul><li><a href="/about/">Who runs this site</a></li><li><a href="/contact/">Get in touch</a></li><li><a href="/privacy/">Privacy policy</a></li><li><a href="/terms/">Terms of use</a></li><li><a href="/disclaimer/">Independence notice</a></li></ul>
       </div>
     </div>
+    <nav class="wrap socials" aria-label="Social profiles">
+      <ul>
+        {SOCIALS.map((s) => <li><a href={s.url} target="_blank" rel="noopener noreferrer me" aria-label={`${SITE.name} on ${s.name}`} set:html={s.svg} /></li>)}
+      </ul>
+    </nav>
     <p class="wrap small copy">© {new Date().getFullYear()} {SITE.name}</p>
   </footer>
 </body>
