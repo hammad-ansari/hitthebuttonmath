@@ -1,4 +1,4 @@
-import { SITE, AUTHOR } from './site';
+import { SITE, AUTHOR, SOCIALS } from './site';
 export type QA = { q: string; a: string };
 export const faqSchema = (items: QA[]) => ({
   '@context': 'https://schema.org', '@type': 'FAQPage',
@@ -10,6 +10,7 @@ export const organizationSchema = () => ({
   email: SITE.email,
   logo: { '@type': 'ImageObject', url: SITE.url + '/favicon.svg' },
   description: 'Free quick-fire primary maths fluency practice (KS1–KS2) with times tables, number bonds, doubles, halves, division and square numbers.',
+  sameAs: SOCIALS.map((s) => s.url),
 });
 export const personSchema = () => ({
   '@context': 'https://schema.org', '@type': 'Person', name: AUTHOR.name, url: SITE.url + AUTHOR.url,
