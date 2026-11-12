@@ -1,8 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { POSTS } from '../../posts';
+const shareText = 'Short guides for parents and primary teachers on times tables, number bonds and the Year 4 Multiplication Tables Check.';
+const shareHashtags = ['PrimaryMaths', 'TimesTables', 'MathsPractice'];
 ---
-<Base title="Maths Practice Blog for Parents and Teachers | Hit the Button Math" description="Clear, practical guides on times tables, number bonds and the Year 4 Multiplication Tables Check for UK parents and primary teachers." crumbs={[{ name: 'Blog', path: '/blog/' }]}>
+<Base title="Maths Practice Blog for Parents and Teachers | Hit the Button Math" description="Clear, practical guides on times tables, number bonds and the Year 4 Multiplication Tables Check for UK parents and primary teachers." shareText={shareText} shareHashtags={shareHashtags} crumbs={[{ name: 'Blog', path: '/blog/' }]}>
   <div class="wrap">
     <h1><span class="grad-text">Blog</span></h1>
     <p class="lead">Practical guides for parents and primary teachers in the UK, on helping children get quicker and more confident with number facts.</p>

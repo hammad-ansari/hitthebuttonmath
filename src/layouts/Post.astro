@@ -4,14 +4,14 @@ import { articleSchema, faqSchema, type QA } from '../lib';
 import Faq from '../components/Faq.astro';
 import Author from '../components/Author.astro';
 import { POSTS } from '../posts';
-interface Props { path: string; faq?: QA[] }
-const { path, faq = [] } = Astro.props;
+interface Props { path: string; faq?: QA[]; shareText?: string; shareHashtags?: string[] }
+const { path, faq = [], shareText, shareHashtags } = Astro.props;
 const post = POSTS.find((p) => p.path === path)!;
 const updated = (post as { updated?: string }).updated || post.date;
 const schema: object[] = [articleSchema(post.title, path, post.desc, post.date, updated)];
 if (faq.length) schema.push(faqSchema(faq));
 ---
-<Base title={post.title} description={post.desc} ogType="article" crumbs={[{ name: 'Blog', path: '/blog/' }, { name: post.title, path }]} schema={schema}>
+<Base title={post.title} description={post.desc} ogType="article" shareText={shareText} shareHashtags={shareHashtags} crumbs={[{ name: 'Blog', path: '/blog/' }, { name: post.title, path }]} schema={schema}>
   <article class="wrap prose">
     <h1><span class="grad-text">{post.title}</span></h1>
     <Author date={post.date} updated={updated} />

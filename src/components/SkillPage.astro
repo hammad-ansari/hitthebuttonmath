@@ -6,10 +6,10 @@ import Related from './Related.astro';
 import Author from './Author.astro';
 import { appSchema, faqSchema, type QA } from '../lib';
 import { SITE } from '../site';
-interface Props { title: string; description: string; h1: string; answer: string; path: string; crumb: string; mode: string; option?: string; theme?: 'classic'|'football'|'basketball'; themeSwitch?: boolean; faq: QA[]; gameHeading?: string }
+interface Props { title: string; description: string; h1: string; answer: string; path: string; crumb: string; mode: string; option?: string; theme?: 'classic'|'football'|'basketball'; themeSwitch?: boolean; faq: QA[]; gameHeading?: string; shareText?: string; shareHashtags?: string[] }
 const p = Astro.props;
 ---
-<Base title={p.title} description={p.description} crumbs={[{ name: p.crumb, path: p.path }]} schema={[appSchema(p.h1, p.path, p.description), ...(p.faq.length ? [faqSchema(p.faq)] : [])]}>
+<Base title={p.title} description={p.description} shareText={p.shareText} shareHashtags={p.shareHashtags} crumbs={[{ name: p.crumb, path: p.path }]} schema={[appSchema(p.h1, p.path, p.description), ...(p.faq.length ? [faqSchema(p.faq)] : [])]}>
   <div class="hero-band"><div class="wrap">
     <span class="eyebrow">★ Free · No sign-up · Any device</span>
     <h1><span class="grad-text">{p.h1}</span></h1>

@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { SITE } from '../../site';
 ---
-<Base title="Contact Hit the Button Math" description="Get in touch with Hit the Button Math with feedback, bug reports, ideas for new games or questions about the site." crumbs={[{ name: 'Contact', path: '/contact/' }]}>
+<Base share={false} title="Contact Hit the Button Math" description="Get in touch with Hit the Button Math with feedback, bug reports, ideas for new games or questions about the site." crumbs={[{ name: 'Contact', path: '/contact/' }]}>
   <div class="wrap prose">
     <h1><span class="grad-text">Contact us</span></h1>
     <div class="answer"><p>Email <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. We read every message, though replies can take a few days.</p></div>

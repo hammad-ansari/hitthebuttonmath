@@ -9,8 +9,10 @@ const faq = [
   { q: 'Should we learn the tables in order from 1 to 12?', a: 'No. Start with 10, 2 and 5 (clear patterns), then 4 and 8 (doubling), 3 and 6, then 9, 11 and 12, and leave 7 until last. That way most "new" facts are already known from another table.' },
   { q: 'How do I know which facts are weak?', a: 'Play one Practice round per table and note which answers need the hint. Or run an MTC-style round and read the "facts to revisit" list at the end.' },
 ];
+const shareText = 'A practical way to learn times tables: a sensible order, a few minutes on most days, and how to find the facts that still slip.';
+const shareHashtags = ['TimesTables', 'PrimaryMaths', 'MathsPractice'];
 ---
-<Post path="/blog/times-tables-tips/" faq={faq}>
+<Post path="/blog/times-tables-tips/" faq={faq} shareText={shareText} shareHashtags={shareHashtags}>
   <div class="answer"><p><strong>In short:</strong> learn the tables in a sensible order, practise for a few minutes most days, build new facts from ones your child already knows, and ask facts out of order so they're recalled, not counted. Most children in England are expected to know them all by the end of Year 4.</p></div>
 
   <nav class="toc" aria-label="On this page">

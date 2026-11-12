@@ -8,9 +8,11 @@ const faq = [
   { q: 'What are near doubles?', a: 'Additions where the numbers are one apart, such as 7+8. Double the smaller and add one: double 7 is 14, so 7+8 is 15.' },
   { q: 'Which numbers does the game use?', a: 'Doubles of 1 to 20 (answers 2 to 40) and halves of even numbers from 2 to 40 (answers 1 to 20).' },
 ];
-
+const shareText = 'Doubling and halving practice for primary children: doubles to 20 and halves of even numbers up to 40.';
+const shareHashtags = ['MentalMaths', 'NumberFacts', 'MathsPractice'];
 ---
 <SkillPage title="Hit the Button Doubles and Halves – Free Doubling & Halving Game"
+  shareText={shareText} shareHashtags={shareHashtags}
   description="Free Hit the Button style doubles and halves game. Double numbers to 20 and halve even numbers to 40 against the clock, with simple mental maths methods."
   h1="Doubles and halves" path="/doubles/" crumb="Doubles and halves" mode="doubles"
   answer="<strong>To double a number, add it to itself. To halve it, split it into two equal parts.</strong> Double 7 is 14, and half of 14 is 7. Choose Doubles or Halves below and race the clock."

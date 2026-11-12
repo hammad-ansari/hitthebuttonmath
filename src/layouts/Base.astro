@@ -2,12 +2,14 @@
 import '@fontsource-variable/fredoka/wght.css';
 import '@fontsource-variable/nunito/wght.css';
 import '../styles/global.css';
+import ShareButtons from '../components/ShareButtons.astro';
 import { SITE, NAV, SOCIALS } from '../site';
 interface Crumb { name: string; path: string }
-interface Props { title: string; description: string; crumbs?: Crumb[]; schema?: object[]; ogType?: string }
-const { title, description, crumbs = [], schema = [], ogType = 'website' } = Astro.props;
+interface Props { title: string; description: string; crumbs?: Crumb[]; schema?: object[]; ogType?: string; share?: boolean; shareText?: string; shareHashtags?: string[] }
+const { title, description, crumbs = [], schema = [], ogType = 'website', share = true, shareText, shareHashtags } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE.url).href;
 const ogImage = new URL('/og-image.png', SITE.url).href;
+const shareCaption = (shareText && shareText.trim()) || `${title}. Free quick-fire maths practice for primary children.`;
 const ld: object[] = [...schema];
 if (crumbs.length) {
   ld.push({
@@ -70,7 +72,10 @@ const here = Astro.url.pathname;
       <ol><li><a href="/">Home</a></li>{crumbs.map((c, i) => <li>{i === crumbs.length - 1 ? <span aria-current="page">{c.name}</span> : <a href={c.path}>{c.name}</a>}</li>)}</ol>
     </nav>
   )}
-  <main id="main"><slot /></main>
+  <main id="main">
+    <slot />
+    {share && <div class="wrap"><ShareButtons url={canonical} title={title} text={shareCaption} hashtags={shareHashtags} image={ogImage} /></div>}
+  </main>
   <footer class="site-footer">
     <div class="wrap"><p class="disclaimer-banner">Independent site — not affiliated with, endorsed by or connected to Topmarks or its Hit the Button game. <a href="/disclaimer/">Read the independence notice</a>.</p></div>
     <div class="wrap foot">

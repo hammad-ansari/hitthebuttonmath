@@ -11,9 +11,11 @@ const faq = [
   { q: 'Which times table is the hardest?', a: 'The Standards and Testing Agency treats the 6, 7, 8, 9 and 12 tables as the most difficult, and gives them the most questions in the Year 4 check. Facts such as 7 × 8 = 56, 6 × 7 = 42 and 12 × 7 = 84 cause the most trouble.' },
   { q: 'What are division facts and square numbers?', a: 'Division facts are times tables in reverse (from 6 × 7 = 42 you get 42 ÷ 6 = 7). A square number is a number times itself, such as 5² = 25, introduced in Year 5.' },
 ];
-
+const shareText = 'Practise times tables from 2 to 12, plus division and square numbers, with a short memory trick for the harder facts.';
+const shareHashtags = ['TimesTables', 'Year4', 'MathsPractice'];
 ---
 <SkillPage title="Hit the Button Times Tables – 2 to 12, Division & Square Numbers Game"
+  shareText={shareText} shareHashtags={shareHashtags}
   description="Free Hit the Button times tables game for every table from 2 to 12, plus division and square numbers, with charts and memory tricks for the hardest facts."
   h1="Hit the Button times tables" path="/times-tables/" crumb="Times tables" mode="tables" option="mixed"
   answer="<strong>Pick any times table from 2 to 12, or mix them, and hit the right answers before time runs out.</strong> Below you'll find a chart and a memory trick for every table, plus division facts and square numbers."

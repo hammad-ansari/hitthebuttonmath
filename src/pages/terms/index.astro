@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { SITE } from '../../site';
 ---
-<Base title="Terms of Use – Hit the Button Math" description="Terms for using this free primary maths practice site: personal and classroom use, intellectual property, children, ads, liability and how to contact us." crumbs={[{ name: 'Terms of use', path: '/terms/' }]}>
+<Base share={false} title="Terms of Use – Hit the Button Math" description="Terms for using this free primary maths practice site: personal and classroom use, intellectual property, children, ads, liability and how to contact us." crumbs={[{ name: 'Terms of use', path: '/terms/' }]}>
   <div class="wrap prose">
     <h1><span class="grad-text">Terms of use</span></h1>
     <p class="meta">Last updated <time datetime={SITE.updated}>{new Date(SITE.updated + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</time></p>

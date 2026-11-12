@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { SITE } from '../../site';
 ---
-<Base title="Privacy Policy – Hit the Button Math" description="How Hit the Button Math handles data: no accounts, scores in localStorage, advertising cookies, child-directed / non-personalised ads and how to contact us." crumbs={[{ name: 'Privacy', path: '/privacy/' }]}>
+<Base share={false} title="Privacy Policy – Hit the Button Math" description="How Hit the Button Math handles data: no accounts, scores in localStorage, advertising cookies, child-directed / non-personalised ads and how to contact us." crumbs={[{ name: 'Privacy', path: '/privacy/' }]}>
   <div class="wrap prose">
     <h1><span class="grad-text">Privacy policy</span></h1>
     <p class="meta">Last updated <time datetime={SITE.updated}>{new Date(SITE.updated + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</time></p>

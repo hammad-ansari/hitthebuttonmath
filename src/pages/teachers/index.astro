@@ -11,9 +11,10 @@ const faq = [
   { q: 'Is this the same as the official MTC practice?', a: 'No. Schools should use the STA "try it out" check for the real screen. Our MTC-style mode is general fluency practice with similar timing and weighting.' },
   { q: 'Are there adverts?', a: 'The site may show a small number of ads away from the game area to cover running costs. Child-directed / non-personalised treatment is described in the privacy policy.' },
 ];
-
+const shareText = 'Classroom ideas for a free, no-login maths game: short starters, interventions, homework and Year 4 check practice.';
+const shareHashtags = ['PrimaryTeachers', 'MathsFluency', 'TimesTables'];
 ---
-<Base title="Hit the Button for Teachers – Classroom Ideas and Starters" description="How teachers can use our free Hit the Button style game in class: starters, interventions, homework, MTC preparation and tracking progress without logins." crumbs={[{ name: 'Teachers', path: '/teachers/' }]} schema={[faqSchema(faq)]}>
+<Base title="Hit the Button for Teachers – Classroom Ideas and Starters" description="How teachers can use our free Hit the Button style game in class: starters, interventions, homework, MTC preparation and tracking progress without logins." shareText={shareText} shareHashtags={shareHashtags} crumbs={[{ name: 'Teachers', path: '/teachers/' }]} schema={[faqSchema(faq)]}>
   <div class="wrap prose">
     <h1><span class="grad-text">Hit the Button for teachers</span></h1>
     <div class="answer"><p><strong>A free, no-login fluency game for Reception to Year 6</strong> that works on whiteboards, Chromebooks and tablets. Use it as a starter, for interventions or as homework, and track progress with the end-of-round score and accuracy.</p></div>

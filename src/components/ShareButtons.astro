@@ -1,0 +1,63 @@
+---
+import { SOCIALS } from '../site';
+interface Props { url: string; title: string; text: string; hashtags?: string[]; image?: string }
+const { url, title, text, hashtags = [], image } = Astro.props;
+const icon = (name: string) => SOCIALS.find((s) => s.name === name)!.svg;
+const tags = (hashtags.length ? hashtags : ['MathsPractice', 'PrimaryMaths'])
+  .slice(0, 3)
+  .map((tag) => `#${tag.replace(/^#/, '')}`)
+  .join(' ');
+const q = encodeURIComponent;
+const wa = `https://wa.me/?text=${q(`${text}\n${url}`)}`;
+const fb = `https://www.facebook.com/sharer/sharer.php?u=${q(url)}`;
+const x = `https://x.com/intent/post?text=${q(`${text} ${tags}`)}&url=${q(url)}`;
+const pin = `https://www.pinterest.com/pin/create/button/?url=${q(url)}&description=${q(text)}${image ? `&media=${q(image)}` : ''}`;
+const threads = `https://www.threads.net/intent/post?text=${q(`${text} ${tags}\n${url}`)}`;
+const links = [
+  { name: 'WhatsApp', label: 'Share on WhatsApp', href: wa, svg: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 3.1a8.4 8.4 0 0 0-7.3 12.5L3.6 20.4l4.9-.9A8.4 8.4 0 1 0 12 3.1zm4.7 11.8c-.2.6-1.1 1-1.5 1.1-.4.1-.9.1-1.4-.1-.3-.1-.8-.3-1.3-.6-2.2-1-3.6-3.2-3.7-3.3-.1-.2-.9-1.2-.9-2.3s.6-1.6.8-1.8c.2-.2.5-.3.7-.3h.4c.2 0 .3 0 .5.4.2.5.7 1.6.7 1.7.1.2 0 .3 0 .5-.1.2-.2.3-.3.5l-.3.4c-.1.1-.2.3-.1.5.1.2.6.9 1.2 1.5.8.7 1.5 1 1.7 1.1.2.1.4.1.5-.1.1-.2.6-.7.7-.9.2-.2.3-.2.5-.1.2.1 1.3.6 1.5.7.2.1.4.2.4.3.1.2.1.7-.2 1.2z"/></svg>' },
+  { name: 'Facebook', label: 'Share on Facebook', href: fb, svg: icon('Facebook') },
+  { name: 'X', label: 'Share on X', href: x, svg: icon('X') },
+  { name: 'Pinterest', label: 'Share on Pinterest', href: pin, svg: icon('Pinterest') },
+  { name: 'Threads', label: 'Share on Threads', href: threads, svg: icon('Threads') },
+];
+---
+<section class="share" aria-label="Share this page" data-title={title} data-text={text} data-url={url}>
+  <p class="share-kicker">Share this page</p>
+  <ul class="share-list">
+    {links.map((l) => <li><a href={l.href} target="_blank" rel="noopener noreferrer" aria-label={l.label}><span class="share-ico" set:html={l.svg} /><span>{l.name}</span></a></li>)}
+    <li class="share-copy" hidden><button type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="share-name" aria-live="polite">Copy link</span></button></li>
+    <li class="share-native" hidden><button type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 16V4M7.5 8 12 3.5 16.5 8M5 14v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5"/></svg><span>Share</span></button></li>
+  </ul>
+  <script is:inline>
+    (function () {
+      var root = (document.currentScript && document.currentScript.parentElement) || document.querySelector('.share');
+      if (!root) return;
+      var url = root.getAttribute('data-url') || '';
+      var title = root.getAttribute('data-title') || '';
+      var text = root.getAttribute('data-text') || '';
+      var copy = root.querySelector('.share-copy');
+      var copyBtn = copy && copy.querySelector('button');
+      var name = copyBtn && copyBtn.querySelector('.share-name');
+      var timer = 0;
+      if (copy && copyBtn && name && navigator.clipboard && navigator.clipboard.writeText) {
+        copy.hidden = false;
+        copyBtn.addEventListener('click', function () {
+          navigator.clipboard.writeText(url).then(function () {
+            name.textContent = 'Copied!';
+            clearTimeout(timer);
+            timer = setTimeout(function () { name.textContent = 'Copy link'; }, 2000);
+          }).catch(function () {});
+        });
+      }
+      var native = root.querySelector('.share-native');
+      var nativeBtn = native && native.querySelector('button');
+      var mobile = window.matchMedia('(max-width: 768px), (hover: none) and (pointer: coarse)').matches;
+      if (native && nativeBtn && mobile && navigator.share) {
+        native.hidden = false;
+        nativeBtn.addEventListener('click', function () {
+          navigator.share({ title: title, text: text, url: url }).catch(function () {});
+        });
+      }
+    })();
+  </script>
+</section>

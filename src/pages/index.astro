@@ -19,8 +19,10 @@ const faq = [
 ];
 import Sources from '../components/Sources.astro';
 import { SRC } from '../sources';
+const shareText = 'Free quick-fire maths for primary children: times tables, number bonds, doubles, halves, division and squares. No sign-up.';
+const shareHashtags = ['TimesTables', 'NumberBonds', 'MathsPractice'];
 ---
-<Base title={title} description={description} schema={[organizationSchema(), personSchema(), 
+<Base title={title} description={description} shareText={shareText} shareHashtags={shareHashtags} schema={[organizationSchema(), personSchema(), 
   { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.url + '/', inLanguage: 'en-GB' },
   appSchema('Hit the Button Maths Game', '/', description), faqSchema(faq)]}>
   <div class="hero-band home-hero"><div class="wrap">

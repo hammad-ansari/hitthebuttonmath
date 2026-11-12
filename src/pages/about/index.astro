@@ -3,8 +3,10 @@ import Base from '../../layouts/Base.astro';
 import { AUTHOR, SITE } from '../../site';
 import { personSchema, organizationSchema } from '../../lib';
 import Author from '../../components/Author.astro';
+const shareText = 'Who runs this free primary maths site, how the guides are checked, and how it stays independent of Topmarks.';
+const shareHashtags = ['PrimaryMaths', 'MathsPractice'];
 ---
-<Base title="About Hit the Button Math" description="Who runs this free primary maths site, how we research the guides, and how we stay independent of Topmarks." crumbs={[{ name: 'About', path: '/about/' }]} schema={[organizationSchema(), personSchema()]}>
+<Base title="About Hit the Button Math" description="Who runs this free primary maths site, how we research the guides, and how we stay independent of Topmarks." shareText={shareText} shareHashtags={shareHashtags} crumbs={[{ name: 'About', path: '/about/' }]} schema={[organizationSchema(), personSchema()]}>
   <div class="wrap prose">
     <h1><span class="grad-text">About Hit the Button Math</span></h1>
     <div class="answer"><p><strong>This is a free, independent website with quick-fire maths games for primary children.</strong> We built it to be fast, simple and safe to use at home or in class.</p></div>
